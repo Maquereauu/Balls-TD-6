@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Fichiers sources">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Fichiers de ressources">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Fichiers sources\Collider">
+      <UniqueIdentifier>{5625be16-165c-4396-86b1-0baeac7b42b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Collider">
+      <UniqueIdentifier>{39c07556-ea30-439d-b09d-3b615e937d9f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Entities">
+      <UniqueIdentifier>{6932dded-e2a0-400b-9089-6fb35ae3c607}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Manager">
+      <UniqueIdentifier>{062cf8e7-b022-46d5-9cc5-5a9a9c9b8bbe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Entities\GameObjects">
+      <UniqueIdentifier>{e3b71d8e-2105-4e82-a40b-707ad4b17dad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Entities\GameObjects\Enemies">
+      <UniqueIdentifier>{a8c75256-534d-4194-b190-ecf93b9c21b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Miscellaneous">
+      <UniqueIdentifier>{9665a60e-4515-49cd-8ed0-8dd86e64c9a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Entities">
+      <UniqueIdentifier>{16dca635-ceee-4ad1-b728-8b0f3edcd9f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Entities\GameObjects">
+      <UniqueIdentifier>{ba373c40-1313-45b9-a315-b726ec86c6ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Entities\GameObjects\Enemies">
+      <UniqueIdentifier>{ca1b7b56-a2ba-4b77-93ea-d5415a335950}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Manager">
+      <UniqueIdentifier>{8e38f22f-b0a6-4aef-b5fc-dca0a259662d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Miscellaneous">
+      <UniqueIdentifier>{39ca4219-1f2e-45a5-b3f6-fcc5bed0d9db}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Balls-TD-6.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="AABBCollider.cpp">
+      <Filter>Fichiers sources\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="CircleCollider.cpp">
+      <Filter>Fichiers sources\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider.cpp">
+      <Filter>Fichiers sources\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>Fichiers sources\Entities\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Fichiers sources\Entities\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Tower.cpp">
+      <Filter>Fichiers sources\Entities\GameObjects\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Tank.cpp">
+      <Filter>Fichiers sources\Entities\GameObjects\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Fast.cpp">
+      <Filter>Fichiers sources\Entities\GameObjects\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Fichiers sources\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Window.cpp">
+      <Filter>Fichiers sources\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>Fichiers sources\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="EventManager.cpp">
+      <Filter>Fichiers sources\Manager</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AABBCollider.h">
+      <Filter>Fichiers d%27en-tête\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="CircleCollider.h">
+      <Filter>Fichiers d%27en-tête\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider.h">
+      <Filter>Fichiers d%27en-tête\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="EventManager.h">
+      <Filter>Fichiers d%27en-tête\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager.h">
+      <Filter>Fichiers d%27en-tête\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Fichiers d%27en-tête\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>Fichiers d%27en-tête\Entities\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Fichiers d%27en-tête\Entities\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Tower.h">
+      <Filter>Fichiers d%27en-tête\Entities\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Tank.h">
+      <Filter>Fichiers d%27en-tête\Entities\GameObjects\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Fast.h">
+      <Filter>Fichiers d%27en-tête\Entities\GameObjects\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Window.h">
+      <Filter>Fichiers d%27en-tête\Miscellaneous</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
