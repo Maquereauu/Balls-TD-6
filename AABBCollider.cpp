@@ -23,19 +23,33 @@ bool AABBCollider::isColliding(const AABBCollider& o_AABBCollider)
 
 bool AABBCollider::isColliding(const CircleCollider& o_circleCollider)
 {
-	// rectangle collide ball
-	if ((_posX + _sizeX < o_circleCollider._posX) || (o_circleCollider._posX + o_circleCollider._sizeX < _posX))
-	{
-		return false;
-	}
+	//only works with squares
+	float x = fabs(o_circleCollider._posX + o_circleCollider._sizeX / 2 - _posX - _sizeX / 2) - _sizeX / 2;
+	float y = fabs(o_circleCollider._posY + o_circleCollider._sizeY / 2 - _posY - _sizeY / 2) - _sizeY / 2;
 
-	else if ((_posY + _sizeY < o_circleCollider._posY) || (o_circleCollider._posY + o_circleCollider._sizeY < _posY))
-	{
-		return false;
+	if (x > 0) {
+		if (y > 0) {
+			if (x * x + y * y < o_circleCollider._sizeX / 2 * o_circleCollider._sizeX / 2)
+			{
+				//std::cout << "collide AABB to Circle" << std::endl;
+				return true;
+			}
+		}
+		else {
+			if (x < o_circleCollider._sizeX / 2)
+			{
+				//std::cout << "collide AABB to Circle" << std::endl;
+				return true;
+			}
+		}
 	}
-
-	//std::cout << "collide AABB to Circle" << std::endl;
-	return true;
+	else {
+		if (y < o_circleCollider._sizeX / 2) {
+			//std::cout << "collide AABB to Circle" << std::endl;
+			return true;
+		}
+	}
+	return false;
 }
 
 std::string AABBCollider::checkCollidingSide(const AABBCollider& o_AABBCollider)
