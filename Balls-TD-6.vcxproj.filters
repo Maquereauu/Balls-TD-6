@@ -49,6 +49,12 @@
     <Filter Include="Fichiers sources\Miscellaneous">
       <UniqueIdentifier>{39ca4219-1f2e-45a5-b3f6-fcc5bed0d9db}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers sources\Math">
+      <UniqueIdentifier>{82be463c-08f7-4b33-9423-ac2c14d564ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Math">
+      <UniqueIdentifier>{6bc174ba-ca8c-4c82-9e94-b5eb13d2d39a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Balls-TD-6.cpp">
@@ -90,6 +96,9 @@
     <ClCompile Include="EventManager.cpp">
       <Filter>Fichiers sources\Manager</Filter>
     </ClCompile>
+    <ClCompile Include="Math.cpp">
+      <Filter>Fichiers sources\Math</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AABBCollider.h">
@@ -127,6 +136,9 @@
     </ClInclude>
     <ClInclude Include="Window.h">
       <Filter>Fichiers d%27en-tête\Miscellaneous</Filter>
+    </ClInclude>
+    <ClInclude Include="Math.h">
+      <Filter>Fichiers d%27en-tête\Math</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
