@@ -2,8 +2,8 @@
 #include <SFML/Graphics.hpp>
 
 class GameObject;
-class Ball;
-class Cannon;
+class Bullet;
+class Tower;
 class Window;
 
 class GameManager
@@ -15,9 +15,9 @@ private:
 	int money;
 	int metal;
 	int health;
-	std::vector<Ball*>* _o_bullet;
+	std::vector<Bullet*>* _o_bullet;
 	Window* _o_window;
-	Cannon* _o_cannon;
+	Tower* _o_cannon;
 	GameManager() {};
 	sf::Clock o_timer;
 	float timer;
@@ -47,11 +47,11 @@ public:
 		return pInstance;
 	}
 
-	void MthrowBall();
+	void MthrowBullet();
 	void Mretry();
 	void Mquit();
 	bool Mwin();
-	void MmoveCannon();
+	void MmoveTower();
 
 	float _speed = 90.f; //
 	void launchGame();

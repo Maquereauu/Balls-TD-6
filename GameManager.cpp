@@ -42,7 +42,7 @@ void GameManager::Initialize()
 	_o_window = new Window(*_width, *_height);
 	_window = _o_window->getWindow();
 	_mousePos = new sf::Vector2i();
-	_o_bullet = new std::vector<bullet*>();
+	_o_bullet = new std::vector<Bullet*>();
 
 	//Game Area
 	_entities.resize(GoLabel::total);
@@ -86,7 +86,7 @@ void GameManager::Mquit()
 	_window->close();
 }
 
-void GameManager::Mthrowbullet()
+void GameManager::MthrowBullet()
 {
 	Math::Vector2 mouseVector = Math::Vector2::createVector(_o_tower->getPos(), _mousePos->x, _mousePos->y).getNormalizeVector();
 
@@ -110,7 +110,7 @@ void GameManager::Mthrowbullet()
 	}
 }
 
-void GameManager::Mmovetower()
+void GameManager::MmoveTower()
 {
 	Math::Vector2 mouseVector = Math::Vector2::createVector(_o_tower->getPos(), _mousePos->x, _mousePos->y).getNormalizeVector();
 	if (mouseVector.y < 0 && Math::Vector2::leftVector.getAngle(mouseVector) >= 15 && Math::Vector2::leftVector.getAngle(mouseVector) <= 165)
