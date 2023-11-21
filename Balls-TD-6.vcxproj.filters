@@ -55,6 +55,12 @@
     <Filter Include="Fichiers d%27en-tête\Math">
       <UniqueIdentifier>{6bc174ba-ca8c-4c82-9e94-b5eb13d2d39a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers sources\Entities\GameObjects\Towers">
+      <UniqueIdentifier>{c55bc289-7a67-43c5-aa23-f3aa38af9b64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Entities\GameObjects\Tower">
+      <UniqueIdentifier>{f07bd228-5b26-416e-ab44-ceb4b2e0c4ef}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Balls-TD-6.cpp">
@@ -74,9 +80,6 @@
     </ClCompile>
     <ClCompile Include="Enemy.cpp">
       <Filter>Fichiers sources\Entities\GameObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="Tower.cpp">
-      <Filter>Fichiers sources\Entities\GameObjects\Enemies</Filter>
     </ClCompile>
     <ClCompile Include="Tank.cpp">
       <Filter>Fichiers sources\Entities\GameObjects\Enemies</Filter>
@@ -98,6 +101,21 @@
     </ClCompile>
     <ClCompile Include="Math.cpp">
       <Filter>Fichiers sources\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Tower.cpp">
+      <Filter>Fichiers sources\Entities\GameObjects\Towers</Filter>
+    </ClCompile>
+    <ClCompile Include="BombTower.cpp">
+      <Filter>Fichiers sources\Entities\GameObjects\Towers</Filter>
+    </ClCompile>
+    <ClCompile Include="BasicTower.cpp">
+      <Filter>Fichiers sources\Entities\GameObjects\Towers</Filter>
+    </ClCompile>
+    <ClCompile Include="SniperTower.cpp">
+      <Filter>Fichiers sources\Entities\GameObjects\Towers</Filter>
+    </ClCompile>
+    <ClCompile Include="Boss.cpp">
+      <Filter>Fichiers sources\Entities\GameObjects\Enemies</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -139,6 +157,18 @@
     </ClInclude>
     <ClInclude Include="Math.h">
       <Filter>Fichiers d%27en-tête\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="BombTower.h">
+      <Filter>Fichiers d%27en-tête\Entities\GameObjects\Tower</Filter>
+    </ClInclude>
+    <ClInclude Include="BasicTower.h">
+      <Filter>Fichiers d%27en-tête\Entities\GameObjects\Tower</Filter>
+    </ClInclude>
+    <ClInclude Include="SniperTower.h">
+      <Filter>Fichiers d%27en-tête\Entities\GameObjects\Tower</Filter>
+    </ClInclude>
+    <ClInclude Include="Boss.h">
+      <Filter>Fichiers d%27en-tête\Entities\GameObjects\Enemies</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

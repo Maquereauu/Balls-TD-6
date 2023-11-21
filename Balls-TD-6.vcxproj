@@ -134,6 +134,9 @@
   <ItemGroup>
     <ClCompile Include="AABBCollider.cpp" />
     <ClCompile Include="Balls-TD-6.cpp" />
+    <ClCompile Include="BasicTower.cpp" />
+    <ClCompile Include="BombTower.cpp" />
+    <ClCompile Include="Boss.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="CircleCollider.cpp" />
     <ClCompile Include="Collider.cpp" />
@@ -143,12 +146,16 @@
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Math.cpp" />
+    <ClCompile Include="SniperTower.cpp" />
     <ClCompile Include="Tank.cpp" />
     <ClCompile Include="Tower.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AABBCollider.h" />
+    <ClInclude Include="BasicTower.h" />
+    <ClInclude Include="BombTower.h" />
+    <ClInclude Include="Boss.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="CircleCollider.h" />
     <ClInclude Include="Collider.h" />
@@ -158,6 +165,7 @@
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Math.h" />
+    <ClInclude Include="SniperTower.h" />
     <ClInclude Include="Tank.h" />
     <ClInclude Include="Tower.h" />
     <ClInclude Include="Window.h" />
