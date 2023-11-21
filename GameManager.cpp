@@ -1,7 +1,8 @@
 #include "GameManager.h"
-
-
-
+#include "GameObject.h"
+#include "EventManager.h"
+#include "Window.h"
+#include "Bullet.h"
 
 
 
@@ -41,9 +42,7 @@ void GameManager::Initialize()
 	_o_window = new Window(*_width, *_height);
 	_window = _o_window->getWindow();
 	_mousePos = new sf::Vector2i();
-	_o_balls = new std::vector<Ball*>();
-	o_file = new FileReader();
-	o_winFile = new FileReader();
+	_o_bullet = new std::vector<bullet*>();
 
 	//Game Area
 	_entities.resize(GoLabel::total);
@@ -55,24 +54,26 @@ void GameManager::Initialize()
 	o_rigthSide->getShape().setFillColor(sf::Color::Color(128, 128, 128, 255));
 	o_top->getShape().setFillColor(sf::Color::Color(128, 128, 128, 255));
 	o_restart->getShape().setFillColor(sf::Color::Green);
-	_o_cannon = new Cannon();
+	_o_tower = new Tower();
+
 	/*
 	* INIT events
 	*/
+
 	EventManager::Get()->AddArea(*_width / 4.f, *_height * 0.1, (*_width / 4.f) * 3, *_height * 0.9, GameArea::Game);
 	EventManager::Get()->AddArea(0, 0, 100, 100, GameArea::Restart);
 
-	EventManager::Get()->AddEvent(GameArea::Game, sf::Event::EventType::MouseButtonPressed, &throwBall);
-	EventManager::Get()->AddEvent(GameArea::Game, sf::Event::EventType::MouseMoved, &moveCannon);
+	EventManager::Get()->AddEvent(GameArea::Game, sf::Event::EventType::MouseButtonPressed, &throwbullet);
+	EventManager::Get()->AddEvent(GameArea::Game, sf::Event::EventType::MouseMoved, &movetower);
 	EventManager::Get()->AddEvent(GameArea::Restart, sf::Event::EventType::MouseButtonPressed, &retry);
 	EventManager::Get()->AddEvent(GameArea::Quit, sf::Event::EventType::Closed, &quit);
 }
 //
 void GameManager::Mretry()
 {
-	// retire les balles en vie
-	std::vector<GameObject*>().swap(_entities[GoLabel::ball]);
-	//_entities[GoLabel::ball].clear();
+	// retire les bulletes en vie
+	std::vector<GameObject*>().swap(_entities[GoLabel::bullet]);
+	//_entities[GoLabel::bullet].clear();
 	// retire les bricks en vie
 	std::vector<GameObject*>().swap(_entities[GoLabel::brick]);
 	//_entities[GoLabel::brick].clear();
@@ -85,22 +86,22 @@ void GameManager::Mquit()
 	_window->close();
 }
 
-void GameManager::MthrowBall()
+void GameManager::Mthrowbullet()
 {
-	Math::Vector2 mouseVector = Math::Vector2::createVector(_o_cannon->getPos(), _mousePos->x, _mousePos->y).getNormalizeVector();
+	Math::Vector2 mouseVector = Math::Vector2::createVector(_o_tower->getPos(), _mousePos->x, _mousePos->y).getNormalizeVector();
 
 	if (mouseVector.y < 0 && Math::Vector2::leftVector.getAngle(mouseVector) >= 10 && Math::Vector2::leftVector.getAngle(mouseVector) <= 170)
 	{
 		if (timer > 0.3)
 		{
-			for (int i = 0; i < _o_balls->size(); i++)
+			for (int i = 0; i < _o_bullet->size(); i++)
 			{
-				if (std::find(_entities[GoLabel::ball].begin(), _entities[GoLabel::ball].end(), _o_balls->at(i)) == _entities[GoLabel::ball].end())
+				if (std::find(_entities[GoLabel::bullet].begin(), _entities[GoLabel::bullet].end(), _o_bullet->at(i)) == _entities[GoLabel::bullet].end())
 				{
-					_o_balls->at(i)->_isDestroyed = false;
-					_o_balls->at(i)->_side = "";
-					_entities[GoLabel::ball].push_back(_o_balls->at(i));
-					_o_cannon->fire(mouseVector, _o_balls->at(i));
+					_o_bullet->at(i)->_isDestroyed = false;
+					_o_bullet->at(i)->_side = "";
+					_entities[GoLabel::bullet].push_back(_o_bullet->at(i));
+					_o_tower->fire(mouseVector, _o_bullet->at(i));
 					timer = o_timer.restart().asSeconds();;
 					break;
 				}
@@ -109,12 +110,12 @@ void GameManager::MthrowBall()
 	}
 }
 
-void GameManager::MmoveCannon()
+void GameManager::Mmovetower()
 {
-	Math::Vector2 mouseVector = Math::Vector2::createVector(_o_cannon->getPos(), _mousePos->x, _mousePos->y).getNormalizeVector();
+	Math::Vector2 mouseVector = Math::Vector2::createVector(_o_tower->getPos(), _mousePos->x, _mousePos->y).getNormalizeVector();
 	if (mouseVector.y < 0 && Math::Vector2::leftVector.getAngle(mouseVector) >= 15 && Math::Vector2::leftVector.getAngle(mouseVector) <= 165)
 	{
-		_o_cannon->move(mouseVector);
+		_o_tower->move(mouseVector);
 	}
 }
 

@@ -15,7 +15,7 @@ private:
 	int money;
 	int metal;
 	int health;
-	std::vector<Ball*>* _o_balls;
+	std::vector<Ball*>* _o_bullet;
 	Window* _o_window;
 	Cannon* _o_cannon;
 	GameManager() {};
