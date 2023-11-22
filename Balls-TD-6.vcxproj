@@ -143,6 +143,7 @@
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="Fast.cpp" />
+    <ClCompile Include="FileReader.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Math.cpp" />
@@ -162,9 +163,11 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EventManager.h" />
     <ClInclude Include="Fast.h" />
+    <ClInclude Include="FileReader.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Math.h" />
+    <ClInclude Include="ModelsEnum.h" />
     <ClInclude Include="SniperTower.h" />
     <ClInclude Include="Tank.h" />
     <ClInclude Include="Tower.h" />
