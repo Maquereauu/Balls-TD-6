@@ -1,15 +1,15 @@
-#include "Enemie.h"
+#include "Enemy.h"
 
-Enemie::Enemie(int maxHp)
+Enemy::Enemy(int maxHp)
     : maxHp(maxHp), Hp(maxHp) {}
 
-void Enemie::takeDamage(int damage) {
+void Enemy::takeDamage(int damage) {
     Hp -= damage;
     if (Hp < 0) {
         Hp = 0;
     }
 }
 
-bool Enemie::isAlive() const {
+bool Enemy::isAlive() const {
     return Hp > 0;
 }
