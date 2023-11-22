@@ -7,7 +7,7 @@ private:
 	float _speed;
 	GameObject* _target;
 public:
-	std::string _side;
+	//std::string _side;
 
 	//Bullet();
 	Bullet(float radius, float x, float y, float speed, int _Damage);
