@@ -1,7 +1,7 @@
 #ifndef ENEMIE_H
 #define ENEMIE_H
 
-class Enemie {
+class Enemie : public GameObject{
 private:
     int maxHp;
     int Hp;
