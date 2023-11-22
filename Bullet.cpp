@@ -1,7 +1,7 @@
 #include "Bullet.h"
 #include "GameObjectEnum.h"
 
-Bullet::Bullet(float radius, float x, float y, float speed, int damage) : GameObject(radius, x, y, speed, GoLabel::Bullets) // create a bullet with is parent
+Bullet::Bullet(float radius, float x, float y, float speed, int damage) : GameObject(radius, x, y, speed, -1) // create a bullet with is parent
 {
     _damage = damage;
     _speed = _speed;

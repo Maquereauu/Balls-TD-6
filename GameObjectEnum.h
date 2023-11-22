@@ -1,7 +1,8 @@
 #pragma once
 typedef enum GoLabel {
-	Towers,
+	Areas,
 	Bullets,
+	Towers,
 	Enemies,
 	Blasts,
 	Total

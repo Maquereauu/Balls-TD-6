@@ -39,19 +39,15 @@ bool CircleCollider::isColliding(const AABBCollider& o_AABBCollider)
 
 bool CircleCollider::isColliding(const CircleCollider& o_circleCollider)
 {
-	// ball collide ball
-	if ((_posX + _sizeX < o_circleCollider._posX) || (o_circleCollider._posX + o_circleCollider._sizeX < _posX))
-	{
-		return false;
-	}
+	double distance = sqrt(pow(o_circleCollider._posX+ o_circleCollider._sizeX/2 - _posX+_sizeX/2, 2) + pow(o_circleCollider._posY + o_circleCollider._sizeX / 2 - _posY + _sizeX / 2, 2));
 
-	else if ((_posY + _sizeY < o_circleCollider._posY) || (o_circleCollider._posY + o_circleCollider._sizeY < _posY))
+	// Check if the distance is less than or equal to the sum of the radii
+	//std::cout << (_sizeX / 2 + o_circleCollider._sizeX / 2) << std::endl;
+	if (distance <= (_sizeX / 2 + o_circleCollider._sizeX / 2))
 	{
-		return false;
+		return true;
 	}
-
-	//std::cout << "collide Circle to Circle" << std::endl;
-	return true;
+	return false;
 }
 
 std::string CircleCollider::checkCollidingSide(const AABBCollider& o_AABBCollider)

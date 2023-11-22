@@ -17,10 +17,10 @@ void GameManager::Create()
 	GameManager::pInstance->Initialize();
 }
 
-void throwBullet()
-{
-	GameManager::Get()->MthrowBullet();
-}
+//void throwBullet()
+//{
+//	GameManager::Get()->MthrowBullet();
+//}
 void quit()
 {
 	GameManager::Get()->Mquit();
@@ -58,6 +58,8 @@ void GameManager::Initialize()
 	o_top->getShape().setFillColor(sf::Color::Color(128, 128, 128, 255));
 	o_restart->getShape().setFillColor(sf::Color::Green);
 	_o_tower = new Tower();*/
+	_o_tower = new Tower(100, 100, 1);
+	_o_enemy = new GameObject(50, 50, 300, 300, 10, GoLabel::Enemies);
 
 	/*
 	* INIT events
@@ -66,7 +68,7 @@ void GameManager::Initialize()
 	EventManager::Get()->AddArea(*_width / 4.f, *_height * 0.1, (*_width / 4.f) * 3, *_height * 0.9, GameArea::Game);
 	EventManager::Get()->AddArea(0, 0, 100, 100, GameArea::Restart);
 
-	EventManager::Get()->AddEvent(GameArea::Game, sf::Event::EventType::MouseButtonPressed, &throwBullet);
+	//EventManager::Get()->AddEvent(GameArea::Game, sf::Event::EventType::MouseButtonPressed, &throwBullet);
 	//EventManager::Get()->AddEvent(GameArea::Game, sf::Event::EventType::MouseMoved, &movetower);
 	EventManager::Get()->AddEvent(GameArea::Restart, sf::Event::EventType::MouseButtonPressed, &retry);
 	EventManager::Get()->AddEvent(GameArea::Quit, sf::Event::EventType::Closed, &quit);
@@ -89,29 +91,29 @@ void GameManager::Mquit()
 	_window->close();
 }
 
-void GameManager::MthrowBullet()
-{
-	Math::Vector2 mouseVector = Math::Vector2::createVector(_o_tower->getPos(), _mousePos->x, _mousePos->y).getNormalizeVector();
-
-	if (mouseVector.y < 0 && Math::Vector2::leftVector.getAngle(mouseVector) >= 10 && Math::Vector2::leftVector.getAngle(mouseVector) <= 170)
-	{
-		if (timer > 0.3)
-		{
-			for (int i = 0; i < _o_bullet->size(); i++)
-			{
-				if (std::find(_entities[GoLabel::Bullets].begin(), _entities[GoLabel::Bullets].end(), _o_bullet->at(i)) == _entities[GoLabel::Bullets].end())
-				{
-					_o_bullet->at(i)->_isDestroyed = false;
-					_o_bullet->at(i)->_side = "";
-					_entities[GoLabel::Bullets].push_back(_o_bullet->at(i));
-					//_o_tower->shoot(mouseVector, _o_bullet->at(i));
-					timer = o_timer.restart().asSeconds();;
-					break;
-				}
-			}
-		}
-	}
-}
+//void GameManager::MthrowBullet()
+//{
+//	Math::Vector2 mouseVector = Math::Vector2::createVector(_o_tower->getPos(), _mousePos->x, _mousePos->y).getNormalizeVector();
+//
+//	if (mouseVector.y < 0 && Math::Vector2::leftVector.getAngle(mouseVector) >= 10 && Math::Vector2::leftVector.getAngle(mouseVector) <= 170)
+//	{
+//		if (timer > 0.3)
+//		{
+//			for (int i = 0; i < _o_bullet->size(); i++)
+//			{
+//				if (std::find(_entities[GoLabel::Bullets].begin(), _entities[GoLabel::Bullets].end(), _o_bullet->at(i)) == _entities[GoLabel::Bullets].end())
+//				{
+//					_o_bullet->at(i)->_isDestroyed = false;
+//					_o_bullet->at(i)->_side = "";
+//					_entities[GoLabel::Bullets].push_back(_o_bullet->at(i));
+//					//_o_tower->shoot(mouseVector, _o_bullet->at(i));
+//					timer = o_timer.restart().asSeconds();;
+//					break;
+//				}
+//			}
+//		}
+//	}
+//}
 void GameManager::launchGame()
 {
 	//_win = false;
@@ -144,6 +146,11 @@ void GameManager::launchGame()
 			}
 		}
 
+		for (int i = 0; i < _towers.size(); i++)
+		{
+			for (int j = 0; j < _entities[GoLabel::Enemies].size(); j++)
+				_towers[i]->enemyInSight(_entities[GoLabel::Enemies][j]);
+		}
 
 		for (int i = 0; i < _entities.size(); i++)
 		{
@@ -162,11 +169,14 @@ void GameManager::launchGame()
 			}
 		}
 
-		for (int i = 0; i < _entities[GoLabel::Bullets].size(); i++)
+		for (int i = 0; i < _towers.size(); i++)
 		{
-			if (_entities[GoLabel::Bullets][i]->getPos().y > *_height)
+			for(int j = 0;j < _towers[i]->_bulletList->size();j++)
 			{
-				_entities[GoLabel::Bullets].erase(std::remove(_entities[GoLabel::Bullets].begin(), _entities[GoLabel::Bullets].end(), _entities[GoLabel::Bullets][i]), _entities[GoLabel::Bullets].end());
+				if (!(_towers[i]->_bulletList->at(j)->isColliding(*(_towers[i]->_area))))
+				{
+					_entities[GoLabel::Bullets].erase(std::remove(_entities[GoLabel::Bullets].begin(), _entities[GoLabel::Bullets].end(), _towers[i]->_bulletList->at(j)), _entities[GoLabel::Bullets].end());
+				}
 			}
 		}
 
@@ -196,4 +206,9 @@ void GameManager::addToEntity(int iLabel, GameObject* o_gameObject)
 		return;
 
 	_entities[iLabel].push_back(o_gameObject);
+}
+
+void GameManager::addToEntity(Tower* o_tower)
+{
+	_towers.push_back(o_tower);
 }

@@ -1,5 +1,6 @@
 #pragma once
 typedef enum TowerLabel {
+	allStats,
 	damage,
 	as,
 	range,
