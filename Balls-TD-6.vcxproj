@@ -164,6 +164,7 @@
     <ClInclude Include="Fast.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GameObjectEnum.h" />
     <ClInclude Include="Math.h" />
     <ClInclude Include="SniperTower.h" />
     <ClInclude Include="Tank.h" />

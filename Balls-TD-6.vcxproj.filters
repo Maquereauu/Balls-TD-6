@@ -170,5 +170,8 @@
     <ClInclude Include="Boss.h">
       <Filter>Fichiers d%27en-tête\Entities\GameObjects\Enemies</Filter>
     </ClInclude>
+    <ClInclude Include="GameObjectEnum.h">
+      <Filter>Fichiers d%27en-tête\Miscellaneous</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
