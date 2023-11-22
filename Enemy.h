@@ -1,6 +1,8 @@
 #ifndef ENEMIE_H
 #define ENEMIE_H
 
+#include"GameObject.h
+
 class Enemie : public GameObject{
 private:
     int maxHp;
