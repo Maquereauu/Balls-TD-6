@@ -4,23 +4,17 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <sstream>
+#include <stdexcept>  // Include this for std::invalid_argument
 
-class FileReader
-{
+class FileReader {
 private:
-	std::vector<std::vector<std::vector<int>>> _modelStats;
-	std::vector<int> _sizeHeight;
-	int _sizeWidth;
-
+    std::vector<std::vector<std::vector<double>>> _modelStats;
+    std::vector<int> _sizeHeight;
 
 public:
-	FileReader();
-
-	void readFile(std::string path);
-	//bool compareFileRead(std::vector<std::vector<int>> startFile);
-	std::vector<std::vector<int>> getFile();
-	int getFileHeight();
-	int getFileWidth();
-	bool isOnlyCommas(const std::string& line);
+    FileReader();
+    void readFile(std::string path);
+    std::vector<std::vector<std::vector<double>>> getFile();
+    bool isOnlyCommas(const std::string& line);
 };
-

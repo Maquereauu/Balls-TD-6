@@ -1,93 +1,60 @@
 #include "fileReader.h"
 
 
-FileReader::FileReader() {};
-
-void FileReader::readFile(std::string path)
-{
-    int i = 0;
-    int j = 0;
-    int c = 0;
+void FileReader::readFile(std::string path) {
     std::fstream newfile;
-    std::string result = "";
-
-
-    newfile.open(path, std::ios::in); //open a file to perform read operation using file object
-    if (newfile.is_open()) { //checking whether the file is open
+    newfile.open(path, std::ios::in);
+    int counter = 0;
+    if (newfile.is_open()) {
         std::string tp;
         _sizeHeight.push_back(0);
-        while (getline(newfile, tp)) { //read data from file object and put it into string.
-            if (isOnlyCommas(tp))
-            {
-                c += 1;
+        _modelStats.resize(_modelStats.size() + 1);
+        while (getline(newfile, tp)) {
+            if (isOnlyCommas(tp)) {
                 _sizeHeight.push_back(0);
+                _modelStats.resize(_modelStats.size() + 1);
+                counter++;
             }
             else {
-                result += tp; // incrémentation d'une string à partir du fichier txt
-                _sizeHeight[c]++;
+                std::stringstream ss(tp);
+                std::string value;
+                _sizeHeight.back()++; // Increment the size for the current row
+
+                // Resize _modelStats before accessing its elements
+                _modelStats.back().resize(_sizeHeight.back());
+
+                while (getline(ss, value, ',')) {
+                    try {
+                        // Convert the string value to a double and add to _modelStats
+                        _modelStats.back()[_sizeHeight.back() - 1].push_back(std::stod(value)); // Correct the indexing
+                    }
+                    catch (const std::invalid_argument& e) {
+                        std::cerr << "Error converting string to double: " << e.what() << std::endl;
+                        // Handle the error (e.g., set a default value or skip the entry)
+                    }
+                }
             }
         }
-    }
-    newfile.close(); //close the file object.
-    _modelStats.resize(_sizeHeight.size());
-    for (int k = 0; k < _sizeHeight.size(); k++)
-    {
-        _modelStats[k].resize(_sizeHeight[k]);
-    }
-    _tabFile.resize(_sizeHeight);
 
-    /* incrémentation du tableau à parti des valeurs présentes dans le fichier txt */
-    while (i < _sizeHeight)
-    {
-        if (result[j] == *" ")
-        {
-            _tabFile[i].push_back(-1);
-        }
-        else if (result[j] == 0)
-        {
-            _tabFile[i].push_back(0);
-        }
-        else if (result[j] == *"&")
-        {
-            i++;
-        }
-        else
-        {
-            _tabFile[i].push_back(result[j] - 48);
-        }
-        j++;
+        newfile.close();
+
+        // Output the read values (for testing purposes)
+        //for (size_t i = 0; i < _modelStats.size(); ++i) {
+        //    for (size_t j = 0; j < _modelStats[i].size(); ++j) {
+        //        for (size_t k = 0; k < _modelStats[i][j].size(); ++k) {
+        //            std::cout << "_modelStats[" << i << "][" << j << "][" << k << "] = "
+        //                << _modelStats[i][j][k] << std::endl;
+        //        }
+        //    }
+        //}
+    }
+    else {
+        std::cerr << "Error opening file: " << path << std::endl;
     }
 }
 
-
-//bool FileReader::compareFileRead(std::vector<std::vector<int>> startFile)
-//{
-//    /* Comparaison entre deux tableaux des valeurs enregistrer depuis un fichier txt */
-//    for (int i = 0; i < _sizeHeight; i++)
-//    {
-//        for (int j = 0; j < _sizeWidth; j++)
-//        {
-//            if (_tabFile[i][j] != startFile[i][j])
-//            {
-//                return false;
-//            }
-//        }
-//    }
-//    return true;
-//}
-
-std::vector<std::vector<int>> FileReader::getFile()
-{
-    return _tabFile;
-}
-
-int FileReader::getFileHeight()
-{
-    return _sizeHeight;
-}
-int FileReader::getFileWidth()
-{
-    return _sizeWidth;
+std::vector<std::vector<std::vector<double>>> FileReader::getFile() {
+    return _modelStats;
 }
 
 bool FileReader::isOnlyCommas(const std::string& line) {
