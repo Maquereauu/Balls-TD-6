@@ -35,7 +35,6 @@ bool CircleCollider::isColliding(const AABBCollider& o_AABBCollider)
 	}
 	return false;
 }
-}
 
 
 bool CircleCollider::isColliding(const CircleCollider& o_circleCollider)

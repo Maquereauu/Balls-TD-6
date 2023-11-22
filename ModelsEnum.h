@@ -1,5 +1,4 @@
 #pragma once
-#pragma once
 typedef enum TowerLabel {
 	damage,
 	as,
@@ -7,11 +6,11 @@ typedef enum TowerLabel {
 	buildingCost,
 	cost,
 	bulletSpeed,
-	total
+	towertotal
 };
 
 typedef enum EnemyLabel {
 	maxHp,
 	speed,
-	total
+	enemytotal
 };

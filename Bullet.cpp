@@ -1,11 +1,10 @@
 #include "Bullet.h"
 #include "GameObjectEnum.h"
 
-Bullet::Bullet(float radius, float x, float y, float _speed, int _Damage, GameObject* _Target) : GameObject(radius, x, y, speed, -GoLabel::Bullet) // create a bullet with is parent
+Bullet::Bullet(float radius, float x, float y, float speed, int damage) : GameObject(radius, x, y, speed, GoLabel::Bullets) // create a bullet with is parent
 {
-    Damage = _Damage;
-    Target = _Target;
-    speed = _speed;
+    _damage = damage;
+    _speed = _speed;
     //setOriginCenter();
     setVector(0.f, 0.f);
 }
@@ -15,19 +14,24 @@ Bullet::Bullet(float radius, float x, float y, float _speed, int _Damage, GameOb
 float Bullet::getRadius() {
     return _sizeX / 2;
 }
-GameObject* Bullet::getTarget() 
+GameObject* Bullet::getTarget()
 {
-    return Target;
+    return _target;
+};
+
+void Bullet::setTarget(GameObject* gameObject)
+{
+     _target = gameObject;
 };
 
 float Bullet::getSpeed() 
 {
-    return speed;
+    return _speed;
 };
 
 float Bullet::getDamage() 
 {
-    return Damage;
+    return _damage;
 };
 /*   void Bullet::onCollisionEnter(GameObject* object) {
 *    std::string collidingSide = checkCollidingSide(*object);

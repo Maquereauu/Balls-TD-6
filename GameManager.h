@@ -1,6 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-
+#include "FileReader.h"
 class GameObject;
 class Bullet;
 class Tower;
@@ -21,12 +21,12 @@ private:
 	GameManager() {};
 	sf::Clock o_timer;
 	float timer;
-
 	sf::RenderWindow* _window;
 	sf::Font _font;
 
 public:
-
+	FileReader* o_model;
+	std::vector<std::vector<std::vector<std::vector<double>>>> _modelStats;
 	int* _width;
 	int* _height;
 	std::vector<std::vector<GameObject*>> _entities;

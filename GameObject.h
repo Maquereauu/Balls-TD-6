@@ -3,7 +3,8 @@
 #include <string>
 #include <vector>
 #include <map>
-
+#include "GameObjectEnum.h"
+#include "ModelsEnum.h"
 #include "GameManager.h"
 #include "Math.h"
 class sf::Shape;
