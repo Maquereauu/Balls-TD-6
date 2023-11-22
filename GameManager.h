@@ -17,7 +17,7 @@ private:
 	int health;
 	std::vector<Bullet*>* _o_bullet;
 	Window* _o_window;
-	Tower* _o_cannon;
+	Tower* _o_tower;
 	GameManager() {};
 	sf::Clock o_timer;
 	float timer;
