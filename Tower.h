@@ -2,5 +2,17 @@
 #include "GameObject.h"
 class Tower : public GameObject
 {
+private:
+	int _AS;
+	int _cost;
+	int _buildingCost;
+	int _damage;
+	int _level;
+	int _range;
+	Tower(int posX,int posY);
+public:
+	void shoot();
+
+
 };
 
