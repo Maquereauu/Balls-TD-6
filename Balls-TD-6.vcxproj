@@ -134,6 +134,9 @@
   <ItemGroup>
     <ClCompile Include="AABBCollider.cpp" />
     <ClCompile Include="Balls-TD-6.cpp" />
+    <ClCompile Include="BasicTower.cpp" />
+    <ClCompile Include="BlastBullet.cpp" />
+    <ClCompile Include="BombTower.cpp" />
     <ClCompile Include="Boss.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="CircleCollider.cpp" />
@@ -149,6 +152,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AABBCollider.h" />
+    <ClInclude Include="BasicTower.h" />
+    <ClInclude Include="BlastBullet.h" />
+    <ClInclude Include="BombTower.h" />
     <ClInclude Include="Boss.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="CircleCollider.h" />
