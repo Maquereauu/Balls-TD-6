@@ -146,5 +146,8 @@
     <ClInclude Include="GameObjectEnum.h">
       <Filter>Fichiers d%27en-tête\Miscellaneous</Filter>
     </ClInclude>
+    <ClInclude Include="GameObjectEnum.h">
+      <Filter>Fichiers d%27en-tête\Miscellaneous</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
