@@ -9,10 +9,9 @@ private:
 	int _damage;
 	int _level;
 	int _range;
-	Tower(int posX,int posY);
+	int _type;
+	Tower(int posX,int posY,int type);
 public:
 	void shoot();
-
-
 };
 

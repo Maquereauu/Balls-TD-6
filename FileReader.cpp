@@ -26,7 +26,9 @@ void FileReader::readFile(std::string path) {
                 while (getline(ss, value, ',')) {
                     try {
                         // Convert the string value to a double and add to _modelStats
-                        _modelStats.back()[_sizeHeight.back() - 1].push_back(std::stod(value)); // Correct the indexing
+                        _modelStats.back()[_sizeHeight.back() - 1].resize(_modelStats.back()[_sizeHeight.back() - 1].size() + 1);
+                        //_modelStats.back()[_sizeHeight.back() - 1][_modelStats.back()[_sizeHeight.back() - 1].size() - 1].push_back(std::stod(value));
+                        _modelStats.back()[_sizeHeight.back() - 1][_modelStats.back()[_sizeHeight.back() - 1].size() - 1].push_back(std::stod(value));
                     }
                     catch (const std::invalid_argument& e) {
                         std::cerr << "Error converting string to double: " << e.what() << std::endl;
@@ -37,23 +39,23 @@ void FileReader::readFile(std::string path) {
         }
 
         newfile.close();
-
-        // Output the read values (for testing purposes)
-        //for (size_t i = 0; i < _modelStats.size(); ++i) {
-        //    for (size_t j = 0; j < _modelStats[i].size(); ++j) {
-        //        for (size_t k = 0; k < _modelStats[i][j].size(); ++k) {
-        //            std::cout << "_modelStats[" << i << "][" << j << "][" << k << "] = "
-        //                << _modelStats[i][j][k] << std::endl;
-        //        }
-        //    }
-        //}
+        for (size_t i = 0; i < _modelStats.size(); ++i) {
+            for (size_t j = 0; j < _modelStats[i].size(); ++j) {
+                for (size_t k = 0; k < _modelStats[i][j].size(); ++k) {
+                    for (size_t l = 0; l < _modelStats[i][j][k].size(); ++l) {
+                        std::cout << "_modelStats[" << i << "][" << j << "][" << k << "][" << l << "] = "
+                            << _modelStats[i][j][k][l] << std::endl;
+                    }
+                }
+            }
+        }
     }
     else {
         std::cerr << "Error opening file: " << path << std::endl;
     }
 }
 
-std::vector<std::vector<std::vector<double>>> FileReader::getFile() {
+std::vector<std::vector<std::vector<std::vector<double>>>> FileReader::getFile() {
     return _modelStats;
 }
 
