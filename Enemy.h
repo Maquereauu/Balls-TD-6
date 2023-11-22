@@ -1,17 +1,17 @@
-#ifndef ENEMIE_H
-#define ENEMIE_H
+#ifndef ENEMY_H
+#define ENEMY_H
 
 #include"GameObject.h
 
-class Enemie : public GameObject{
+class Enemy : public GameObject{
 private:
     int maxHp;
     int Hp;
 
 public:
-    Enemie(int maxHp);
+    Enemy(int maxHp);
     void takeDamage(int damage);
     bool isAlive() const;
 };
 
-#endif // ENEMIE_H
+#endif // ENEMY_H
