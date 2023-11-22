@@ -14,4 +14,4 @@ public:
     bool isAlive() const;
 };
 
-#endif // ENEMY_H
+#endif // ENEMIE_H
