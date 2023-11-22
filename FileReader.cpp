@@ -32,7 +32,7 @@ void FileReader::readFile(std::string path) {
                 size_t pos = tp.find(',');
                 if (pos != std::string::npos && pos + 1 < tp.length() && tp[pos + 1] == '"') {
                     isList = true;
-                    std::cout << "Double quote found after the first comma in line " << counter << std::endl;
+                    //std::cout << "Double quote found after the first comma in line " << counter << std::endl;
                 }
 
                 while (getline(ss, value, ',')) {
@@ -51,7 +51,7 @@ void FileReader::readFile(std::string path) {
                         counter++;
                     }
                     catch (const std::invalid_argument& e) {
-                        std::cerr << "Error converting string to double: " << e.what() << std::endl;
+                        //std::cerr << "Error converting string to double: " << e.what() << std::endl;
                         // Handle the error (e.g., set a default value or skip the entry)
                     }
                 }

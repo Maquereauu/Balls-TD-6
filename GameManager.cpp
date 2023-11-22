@@ -43,8 +43,9 @@ void GameManager::Initialize()
 	_mousePos = new sf::Vector2i();
 	_o_bullet = new std::vector<Bullet*>();
 	o_model = new FileReader();
+	_entities.resize(GoLabel::Total);
 	//File Reader
-	o_model->readFile("yo.csv");
+	o_model->readFile("models.csv");
 
 	//Game Area
 	/*_entities.resize(GoLabel::Total);
