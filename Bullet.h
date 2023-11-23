@@ -17,5 +17,6 @@ public:
 	GameObject* getTarget();
 	void setTarget(GameObject* gameObject);
 	void setVectorTowardsTarget();
+	void onCollisionEnter(GameObject* object) override;
 	//void onCollisionEnter(GameObject* object) override;
 };
