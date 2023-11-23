@@ -3,6 +3,7 @@
 #include "FileReader.h"
 class GameObject;
 class Bullet;
+class Enemy;
 class Tower;
 class Window;
 
@@ -32,6 +33,7 @@ public:
 	int* _height;
 	std::vector<std::vector<GameObject*>> _entities;
 	std::vector<Tower*> _towers;
+	std::vector<Enemy*> _enemies;
 	sf::Vector2i* _mousePos;
 
 	typedef enum GameArea
@@ -59,5 +61,6 @@ public:
 	void launchGame();
 	void addToEntity(int iLabel, GameObject* o_gameObject);
 	void addToEntity(Tower* o_tower);
+	void addToEntity(Enemy* o_enemy);
 };
 

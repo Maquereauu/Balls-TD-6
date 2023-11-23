@@ -194,6 +194,7 @@ void GameManager::launchGame()
 		timer = o_timer.getElapsedTime().asSeconds();
 	}
 }
+
 //void GameManager::MmoveTower()
 //{
 //	Math::Vector2 mouseVector = Math::Vector2::createVector(_o_tower->getPos(), _mousePos->x, _mousePos->y).getNormalizeVector();
@@ -214,4 +215,9 @@ void GameManager::addToEntity(int iLabel, GameObject* o_gameObject)
 void GameManager::addToEntity(Tower* o_tower)
 {
 	_towers.push_back(o_tower);
+}
+
+void GameManager::addToEntity(Enemy* o_enemy)
+{
+	_enemies.push_back(o_enemy);
 }
