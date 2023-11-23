@@ -44,8 +44,12 @@ void GameManager::Initialize()
 	_o_bullet = new std::vector<Bullet*>();
 	o_model = new FileReader();
 	_entities.resize(GoLabel::Total);
+	money = 400;
+	metal = 3;
+	health = 100;
 	//File Reader
 	o_model->readFile("models.csv");
+
 
 	//Game Area
 	/*_entities.resize(GoLabel::Total);
@@ -60,6 +64,8 @@ void GameManager::Initialize()
 	_o_tower = new Tower();*/
 	_o_tower = new Tower(100, 100, 1);
 	_o_enemy = new GameObject(50, 50, 300, 300, 10, GoLabel::Enemies);
+	_o_enemy->setVector(1.0, 0.f);
+	_o_door = new GameObject(150, 150, 1500, 300, 10, GoLabel::Door);
 
 	/*
 	* INIT events
@@ -127,29 +133,21 @@ void GameManager::launchGame()
 
 		for (int i = 0; i < _entities[GoLabel::Bullets].size(); i++)
 		{
-			for (int j = 0; j < _entities.size(); j++)
+			for (int j = 0; j < _entities[GoLabel::Enemies].size(); j++)
 			{
-				if (j != GoLabel::Towers && j != GoLabel::Bullets)
-				{
-					_entities[GoLabel::Bullets][i]->collideList(_entities[j]);
-				}
-				/*else if (j == GoLabel::Bullets)
-				{
-					for (int k = 0; k < _entities[GoLabel::Bullets].size(); k++)
-					{
-						if (k != i)
-						{
-							_entities[GoLabel::Bullets][i]->collide(_entities[GoLabel::Bullets][k]);
-						}
-					}
-				}*/
+				_entities[GoLabel::Bullets][i]->collide(_entities[GoLabel::Enemies][j]);
 			}
+		}
+
+		for (int i = 0; i < _entities[GoLabel::Enemies].size(); i++)
+		{
+			_entities[GoLabel::Enemies][i]->collide(_o_door);
 		}
 
 		for (int i = 0; i < _towers.size(); i++)
 		{
 			for (int j = 0; j < _entities[GoLabel::Enemies].size(); j++)
-				_towers[i]->enemyInSight(_entities[GoLabel::Enemies][j]);
+				_towers[i]->stateMachine(_entities[GoLabel::Enemies][j]);
 		}
 
 		for (int i = 0; i < _entities.size(); i++)
@@ -161,13 +159,6 @@ void GameManager::launchGame()
 				}
 			}
 		}
-		for (int i = 0; i < _entities.size(); i++)
-		{
-			for (int j = 0; j < _entities[i].size(); j++)
-			{
-				_entities[i][j]->moveShape(deltaTime, _entities[i][j]->getVect());
-			}
-		}
 
 		for (int i = 0; i < _towers.size(); i++)
 		{
@@ -177,9 +168,21 @@ void GameManager::launchGame()
 				{
 					_entities[GoLabel::Bullets].erase(std::remove(_entities[GoLabel::Bullets].begin(), _entities[GoLabel::Bullets].end(), _towers[i]->_bulletList->at(j)), _entities[GoLabel::Bullets].end());
 				}
+				else
+				{
+					_towers[i]->_bulletList->at(j)->setVectorTowardsTarget();
+				}
+
 			}
 		}
 
+		for (int i = 0; i < _entities.size(); i++)
+		{
+			for (int j = 0; j < _entities[i].size(); j++)
+			{
+				_entities[i][j]->moveShape(deltaTime, _entities[i][j]->getVect());
+			}
+		}
 		_window->clear();
 		for (int i = 0; i < GoLabel::Total; i++)
 		{

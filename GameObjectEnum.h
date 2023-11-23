@@ -5,5 +5,6 @@ typedef enum GoLabel {
 	Towers,
 	Enemies,
 	Blasts,
+	Door,
 	Total
 };

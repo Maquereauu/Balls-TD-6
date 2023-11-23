@@ -42,3 +42,11 @@ float Bullet::getDamage()
 *    _side = collidingSide;
      }
 */ 
+
+void Bullet::setVectorTowardsTarget() {
+    if(_target)
+    {
+        Math::Vector2 enemyVector = Math::Vector2::createVector(Math::Vector2(_posX + _sizeX / 2, _posY + _sizeY / 2), _target->getPos(0.5).x, _target->getPos(0.5).y).getNormalizeVector();
+        setVector(enemyVector.x, enemyVector.y);
+    }
+}

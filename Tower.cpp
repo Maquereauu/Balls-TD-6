@@ -1,7 +1,7 @@
 #include "Tower.h"
 
 #include "Bullet.h"
-
+#include "TowerStates.h"
 Tower::Tower(int posX,int posY , int type) : GameObject(100,100, posX, posY,0, GoLabel::Towers)
 {
 	_type = type;
@@ -11,6 +11,7 @@ Tower::Tower(int posX,int posY , int type) : GameObject(100,100, posX, posY,0, G
 	_area = new GameObject(_range, _posX + _sizeX / 2 - _range, _posY + _sizeY / 2 - _range, 0, GoLabel::Areas);
 	timer = 1 / _AS +1;
 	GameManager::Get()->addToEntity(this);
+	_state = TowerStates::idle;
 }
 
 void Tower::shoot(GameObject* enemy) {
@@ -20,7 +21,6 @@ void Tower::shoot(GameObject* enemy) {
 		{
 			if (std::find(GameManager::Get()->_entities[GoLabel::Bullets].begin(), GameManager::Get()->_entities[GoLabel::Bullets].end(), _bulletList->at(i)) == GameManager::Get()->_entities[GoLabel::Bullets].end())
 			{
-				std::cout << "yo" << std::endl;
 				_bulletList->at(i)->_isDestroyed = false;
 				GameManager::Get()->_entities[GoLabel::Bullets].push_back(_bulletList->at(i));
 				float x = _posX + _sizeX / 2 - (_bulletList->at(i)->getRadius());
@@ -40,10 +40,24 @@ void Tower::shoot(GameObject* enemy) {
 void Tower::enemyInSight(GameObject* enemy) {
 	if (_area->isColliding(*enemy))
 	{
-		shoot(enemy);
+		_state = TowerStates::shoot;
+	}
+	else {
+		_state = TowerStates::idle;
 	}
 }
 
+void Tower::stateMachine(GameObject* enemy) {
+	switch (_state) {
+	case TowerStates::idle:
+		enemyInSight(enemy);
+		break;
+	case TowerStates::shoot:
+		shoot(enemy);
+		enemyInSight(enemy);
+		break;
+	}
+}
 
 void Tower::upgrade() {
 	_level += 1;

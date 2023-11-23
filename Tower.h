@@ -16,6 +16,7 @@ private:
 	int _type;
 	sf::Clock o_timer;
 	float timer;
+	int _state;
 public:
 	std::vector<Bullet*>* _bulletList;
 	GameObject* _area;
@@ -25,5 +26,6 @@ public:
 	void giveStats();
 	void upgrade();
 	bool canUpgrade();
+	void stateMachine(GameObject* enemy);
 };
 

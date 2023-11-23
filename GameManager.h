@@ -24,7 +24,7 @@ private:
 	float timer;
 	sf::RenderWindow* _window;
 	sf::Font _font;
-
+	GameObject* _o_door;
 public:
 	FileReader* o_model;
 	std::vector<std::vector<std::vector<std::vector<double>>>> _modelStats;

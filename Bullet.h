@@ -16,5 +16,6 @@ public:
 	float getDamage();
 	GameObject* getTarget();
 	void setTarget(GameObject* gameObject);
+	void setVectorTowardsTarget();
 	//void onCollisionEnter(GameObject* object) override;
 };
