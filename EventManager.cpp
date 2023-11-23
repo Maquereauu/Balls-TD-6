@@ -34,9 +34,10 @@ void EventManager::Update(sf::RenderWindow* _window) {
 	{
 		for (int i = 0; i < m_oAreas.size(); i++)
 		{
-			if ((GameManager::Get()->_mousePos->x >= m_oAreas[i]._x && GameManager::Get()->_mousePos->x <= (m_oAreas[i]._width)) && (GameManager::Get()->_mousePos->y >= m_oAreas[i]._y && GameManager::Get()->_mousePos->y <= m_oAreas[i]._height))
+			if ((GameManager::_mousePos->x >= m_oAreas[i]._x && GameManager::Get()->_mousePos->x <= (m_oAreas[i]._width)) && (GameManager::Get()->_mousePos->y >= m_oAreas[i]._y && GameManager::Get()->_mousePos->y <= m_oAreas[i]._height))
 			{
 				CheckEvent(m_oAreas[i]._eGameArea, event.type);
+				std::cout << Get()->_mousePos->x;
 			}
 			else {
 				CheckEvent(GameManager::GameArea::Quit, event.type);
