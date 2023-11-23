@@ -67,17 +67,27 @@ void GameManager::Initialize()
 	_o_enemy->setVector(1.0, 0.f);
 	_o_door = new GameObject(150, 150, 1500, 300, 10, GoLabel::Door);
 
+	uhdSelectTowerUn = new GameObject(100, 100, 30, 15, 0, GoLabel::Door);
+	uhdSelectTowerDeux = new GameObject(100, 100, 140, 15, 0, GoLabel::Door);
+	uhdSelectTowertroi = new GameObject(100, 100, 250, 15, 0, GoLabel::Door);
+
 	/*
 	* INIT events
 	*/
 
 	EventManager::Get()->AddArea(*_width / 4.f, *_height * 0.1, (*_width / 4.f) * 3, *_height * 0.9, GameArea::Game);
-	EventManager::Get()->AddArea(0, 0, 100, 100, GameArea::Restart);
+	EventManager::Get()->AddArea(0, 980, 100, 100, GameArea::Restart);
+	EventManager::Get()->AddArea(30, 15, 100, 100, GameArea::SelectFirstTurret);
+	EventManager::Get()->AddArea(140, 15, 100, 100, GameArea::SelectSecondTurret);
+	EventManager::Get()->AddArea(250, 15, 100, 100, GameArea::SelectThirdTurret);
 
 	//EventManager::Get()->AddEvent(GameArea::Game, sf::Event::EventType::MouseButtonPressed, &throwBullet);
 	//EventManager::Get()->AddEvent(GameArea::Game, sf::Event::EventType::MouseMoved, &movetower);
 	EventManager::Get()->AddEvent(GameArea::Restart, sf::Event::EventType::MouseButtonPressed, &retry);
 	EventManager::Get()->AddEvent(GameArea::Quit, sf::Event::EventType::Closed, &quit);
+	EventManager::Get()->AddEvent(GameArea::SelectFirstTurret, sf::Event::EventType::MouseButtonPressed, &quit);
+	EventManager::Get()->AddEvent(GameArea::SelectSecondTurret, sf::Event::EventType::MouseButtonPressed, &quit);
+	EventManager::Get()->AddEvent(GameArea::SelectThirdTurret, sf::Event::EventType::MouseButtonPressed, &quit);
 }
 //
 void GameManager::Mretry()

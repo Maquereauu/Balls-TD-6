@@ -25,6 +25,9 @@ private:
 	sf::RenderWindow* _window;
 	sf::Font _font;
 	GameObject* _o_door;
+	GameObject* uhdSelectTowerUn;
+	GameObject* uhdSelectTowerDeux;
+	GameObject* uhdSelectTowertroi;
 public:
 	FileReader* o_model;
 	std::vector<std::vector<std::vector<std::vector<double>>>> _modelStats;
@@ -36,10 +39,16 @@ public:
 
 	typedef enum GameArea
 	{
-		None,
-		Game,
+		SelectFirstTurret,
+		SelectSecondTurret,
+		SelectThirdTurret,
+		FirstTurret,
+		SecondTurret,
+		ThirdTurret,
+		start,
 		Restart,
-		Quit
+		Quit,
+		Game
 	};
 
 	static void Create();
