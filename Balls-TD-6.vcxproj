@@ -164,6 +164,7 @@
     <ClInclude Include="Math.h" />
     <ClInclude Include="ModelsEnum.h" />
     <ClInclude Include="Tower.h" />
+    <ClInclude Include="TowerStates.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

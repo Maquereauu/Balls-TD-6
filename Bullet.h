@@ -3,18 +3,19 @@
 class Bullet : public GameObject
 {
 private:
-	int Damage;
-	GameObject* Target;
-	float speed;
-
+	int _damage;
+	float _speed;
+	GameObject* _target;
 public:
-	std::string _side;
+	//std::string _side;
 
 	//Bullet();
-	Bullet(float radius, float x, float y, float speed, int _Damage, GameObject* _Target);
+	Bullet(float radius, float x, float y, float speed, int _Damage);
 	float getRadius();
 	float getSpeed();
 	float getDamage();
 	GameObject* getTarget();
+	void setTarget(GameObject* gameObject);
+	void setVectorTowardsTarget();
 	//void onCollisionEnter(GameObject* object) override;
 };

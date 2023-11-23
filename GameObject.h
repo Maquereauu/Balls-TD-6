@@ -3,7 +3,8 @@
 #include <string>
 #include <vector>
 #include <map>
-
+#include "GameObjectEnum.h"
+#include "ModelsEnum.h"
 #include "GameManager.h"
 #include "Math.h"
 class sf::Shape;
@@ -15,10 +16,9 @@ public:
 	//std::map<std::string, int> _sides = { {"left",1},{"top",2},{"right",3},{"bottom",4} };
 	float _speed;
 	bool _isDestroyed;
-
-protected:
 	float _sizeX;
 	float _sizeY;
+protected:
 	float _posX;
 	float _posY;
 	float _rotate;

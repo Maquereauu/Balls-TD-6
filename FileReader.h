@@ -9,7 +9,7 @@
 
 class FileReader {
 private:
-    std::vector<std::vector<std::vector<std::vector<double>>>> _modelStats;
+    //std::vector<std::vector<std::vector<std::vector<double>>>> _modelStats;
     std::vector<int> _sizeHeight;
 
 public:
