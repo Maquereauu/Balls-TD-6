@@ -9,6 +9,9 @@ Tower::Tower(int posX,int posY , int type) : GameObject(100,100, posX, posY,0, G
 	_blastList = new std::vector<BlastBullet*>();
 	giveStats();
 	_area = new GameObject(_range, _posX + _sizeX / 2 - _range, _posY + _sizeY / 2 - _range, 0, GoLabel::Areas);
+	sf::Color color = _area->getShape().getFillColor();
+	color.a = 51;
+	_area->getShape().setFillColor(color);
 	timer = 1 / _AS +1;
 	GameManager::Get()->addToEntity(this);
 	_state = TowerStates::idle;
