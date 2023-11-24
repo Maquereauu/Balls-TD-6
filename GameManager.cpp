@@ -116,8 +116,8 @@ void GameManager::Initialize()
 	o_restart->getShape().setFillColor(sf::Color::Green);
 	_o_tower = new Tower();*/
 	_waves = { { 0,0,0,0,0,1,1 } ,{ 0,0,0,0,1,1,1 } ,{ 0,0,0,0,1,1,2 } };
-	_o_tower.push_back(new Tower(920, 600, 1));
-	_o_door = new GameObject(150, 150, 1500, 300, 10, GoLabel::Door);
+	_o_tower.push_back(new Tower(920, 700, 1));
+	_o_door = new GameObject(150, 150, 1500, 500, 10, GoLabel::Door);
 
 	uhdSelectTowerDeux = new GameObject(100, 100, 140, 15, 0, GoLabel::Door);
 	uhdSelectTowerUn = new GameObject(100, 100, 30, 15, 0, GoLabel::Door);
@@ -205,7 +205,7 @@ void GameManager::launchGame()
 			if (enemiesCounter < _waves[wave].size())
 			{
 				if (timerSpawn > 2) {
-					new Enemy(150 - 50 * _waves[0][enemiesCounter], 300, _waves[wave][enemiesCounter]);
+					new Enemy(150 - 50 * _waves[wave][enemiesCounter], 550 - 50 * _waves[wave][enemiesCounter], _waves[wave][enemiesCounter]);
 					enemiesCounter++;
 					timerSpawn = o_timerSpawn.restart().asSeconds();;
 				}
