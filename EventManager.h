@@ -35,6 +35,7 @@ class EventManager
 private:
 	static EventManager* pInstance;
 	EventManager();
+	int ActuelIndex;
 
 public:
 
@@ -69,5 +70,6 @@ public:
 
 	void Update(sf::RenderWindow* _window);
 	std::vector<Area> GetAreaVector();
+	int getActuelIndex();
 };
 
