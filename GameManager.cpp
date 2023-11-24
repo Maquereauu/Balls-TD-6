@@ -132,7 +132,6 @@ void GameManager::Initialize()
 	o_restart->getShape().setFillColor(sf::Color::Green);
 	_o_tower = new Tower();*/
 	_waves = { { 0,0,0,0,0,1,1 } ,{ 0,0,0,0,1,1,1 } ,{ 0,0,0,0,1,1,2 } };
-	_o_tower.push_back(new Tower(920, 700, 1));
 	_o_door = new GameObject(150, 150, 1500, 500, 10, GoLabel::Door);
 
 	uhdSelectTowerDeux = new GameObject(100, 100, 140, 15, 0, GoLabel::Door);
