@@ -44,11 +44,17 @@ void Enemy::onCollisionEnter(GameObject* object) {
             for (int i = 0; i < GameManager::Get()->_blastRadius.size(); i++)
             {
                 std::vector<Bullet*> _blastRadius = GameManager::Get()->_blastRadius;
-                _currentHealth -= (*std::find(_blastRadius.begin(), _blastRadius.end(), object))->getDamage();
+                int damageTaken = (*std::find(_blastRadius.begin(), _blastRadius.end(), object))->getDamage();
+                _currentHealth -= damageTaken;
                 if (_currentHealth <= 0) {
+                    GameManager::Get()->money += damageTaken + _currentHealth;
                     _currentHealth = 0;
+
                     setPos(-1000, -1000);
                     _isDestroyed = true;
+                }
+                else {
+                    GameManager::Get()->money += damageTaken;
                 }
             }
         }
@@ -61,11 +67,16 @@ void Enemy::onCollisionEnter(GameObject* object) {
                     std::vector<Bullet*>* bulletList = GameManager::Get()->_towers[i]->_bulletList;
                     if (std::find(bulletList->begin(), bulletList->end(), object) != bulletList->end())
                     {
-                        _currentHealth -= (*std::find(bulletList->begin(), bulletList->end(), object))->getDamage();
+                        int damageTaken = (*std::find(bulletList->begin(), bulletList->end(), object))->getDamage();
+                        _currentHealth -= damageTaken;
                         if (_currentHealth <= 0) {
+                            GameManager::Get()->money += damageTaken + _currentHealth;
                             _currentHealth = 0;
                             setPos(-1000, -1000);
                             _isDestroyed = true;
+                        }
+                        else {
+                            GameManager::Get()->money += damageTaken;
                         }
                     }
                 }
@@ -73,11 +84,16 @@ void Enemy::onCollisionEnter(GameObject* object) {
                     std::vector<BlastBullet*>* blastList = GameManager::Get()->_towers[i]->_blastList;
                     if(std::find(blastList->begin(), blastList->end(), object) != blastList->end())
                     {
-                        _currentHealth -= (*std::find(blastList->begin(), blastList->end(), object))->getDamage();
+                        int damageTaken = (*std::find(blastList->begin(), blastList->end(), object))->getDamage();
+                        _currentHealth -= damageTaken;
                         if (_currentHealth <= 0) {
+                            GameManager::Get()->money += damageTaken + _currentHealth;
                             _currentHealth = 0; 
                             setPos(-1000, -1000);
                             _isDestroyed = true;
+                        }
+                        else {
+                            GameManager::Get()->money += damageTaken;
                         }
                     }
                 }

@@ -83,7 +83,15 @@ void GameManager::Initialize()
 	text.setCharacterSize(24);
 	text.setFillColor(sf::Color::Green);
 	text.setStyle(sf::Text::Bold | sf::Text::Underlined);
-	text.setPosition(200,15);
+	text.setPosition(500,15);
+
+
+	textMetal.setFont(font);
+	textMetal.setCharacterSize(24);
+	textMetal.setFillColor(sf::Color::Green);
+	textMetal.setStyle(sf::Text::Bold | sf::Text::Underlined);
+	textMetal.setPosition(700, 15);
+
 
 	winText.setFont(font);
 	winText.setString("You won!");
@@ -356,14 +364,17 @@ void GameManager::launchGame()
 		{
 			_o_window->winDraw(_entities[i]);
 		}
-		text.setString(std::to_string(money));
+		text.setString("Money: " + std::to_string(money));
+		textMetal.setString("Metal: " + std::to_string(metal));
 		_window->draw(text);
+		_window->draw(textMetal);
 		_window->display();
 		if (_entities[GoLabel::Enemies].size() == 0 && enemiesCounter == _waves[wave].size())
 		{
 			wave++;
 			enemiesCounter = 0;
 			timerSpawn = 3.f;
+			metal++;
 		}
 		deltaTime = o_clock.restart().asSeconds();
 		//timer = o_timer.getElapsedTime().asSeconds();

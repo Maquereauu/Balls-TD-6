@@ -15,6 +15,7 @@ private:
 	sf::Texture _texture;
 	sf::Sprite* _background;
 	sf::Text text;
+	sf::Text textMetal;
 	sf::Text winText;
 	sf::Text loseText;
 	static GameManager* pInstance;
