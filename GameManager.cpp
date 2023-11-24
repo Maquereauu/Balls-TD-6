@@ -70,7 +70,7 @@ void GameManager::Initialize()
 	_o_bullet = new std::vector<Bullet*>();
 	o_model = new FileReader();
 	_entities.resize(GoLabel::Total);
-	money = 400;
+	money = 4000;
 	metal = 3;
 	health = 100;
 	//File Reader
@@ -80,7 +80,6 @@ void GameManager::Initialize()
 		// error...
 	}
 	text.setFont(font);
-	text.setString("Hello world");
 	text.setCharacterSize(24);
 	text.setFillColor(sf::Color::Green);
 	text.setStyle(sf::Text::Bold | sf::Text::Underlined);
@@ -323,6 +322,7 @@ void GameManager::launchGame()
 		{
 			_o_window->winDraw(_entities[i]);
 		}
+		text.setString(std::to_string(money));
 		_window->draw(text);
 		_window->display();
 		if (_entities[GoLabel::Enemies].size() == 0 && enemiesCounter == _waves[wave].size() -1)
@@ -412,7 +412,7 @@ void GameManager::MPosetaTour()
 			_o_tower.push_back(new Tower(_mousePos->x, _mousePos->y, TowerCreated));
 			metal = metal - GameManager::Get()->_modelStats[0][TowerLabel::buildingCost][TowerCreated][0];
 			EventManager::Get()->AddArea(_mousePos->x, _mousePos->y, 100, 100, GameArea::TowerArea);
-			EventManager::Get()->AddEvent(GameArea::TowerArea, sf::Event::EventType::MouseButtonPressed, &Upgrade);
+			EventManager::Get()->AddEvent(GameArea::TowerArea, sf::Event::EventType::KeyPressed, &Upgrade);
 			TowerCreated = -1;
 		}
 		
@@ -421,13 +421,19 @@ void GameManager::MPosetaTour()
 
 void GameManager::MUpgrade(Tower latour)
 {
-	if(latour.canUpgrade() == false)
+	if (latour.canUpgrade() == false) {
 		return;
+	}
+		
 
 	if (money < GameManager::Get()->_modelStats[0][TowerLabel::cost][latour._type][0])
 		return;
 
+	if ((_mousePos->x < latour.getPos().x - 100 && _mousePos->x >(100 + latour.getPos().x)) && (_mousePos->y < latour.getPos().y - 100 && _mousePos->y >(100 + latour.getPos().y)))
+		return;
+
 	latour.upgrade();
+	money = money - GameManager::Get()->_modelStats[0][TowerLabel::cost][latour._type][0];
 };
 
 std::vector<Tower*>& GameManager::GetTowerList()
