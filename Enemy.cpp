@@ -1,7 +1,7 @@
 #include "Enemy.h"
 #include "Tower.h"
 #include "BlastBullet.h"
-Enemy::Enemy(float posx, float posy,int type) : GameObject(50 + 100*type,50 + 100*type, posx, posy, 0, GoLabel::Enemies){
+Enemy::Enemy(float posx, float posy, int type) : GameObject(50 + 100 * type, 50 + 100 * type, posx, posy, 0, GoLabel::Enemies) {
     _type = type;
     _maxHealth = GameManager::Get()->_modelStats[1][EnemyLabel::maxHp][_type][0];
     _currentHealth = _maxHealth;
@@ -18,7 +18,7 @@ float Enemy::getRadius() {
 void Enemy::takeDamage(int damage) {
     _currentHealth -= damage;
     if (_currentHealth < 0) {
-        _currentHealth = 0;
+        //_currentHealth = 0;
         _isDestroyed = true;
     }
 }
@@ -45,11 +45,12 @@ void Enemy::onCollisionEnter(GameObject* object) {
                 std::vector<Bullet*> _blastRadius = GameManager::Get()->_blastRadius;
                 _currentHealth -= (*std::find(_blastRadius.begin(), _blastRadius.end(), object))->getDamage();
                 if (_currentHealth <= 0) {
-                    _currentHealth = 0;
+                    //_currentHealth = 0;
                     _isDestroyed = true;
                 }
             }
-        }else
+        }
+        else
         {
             for (int i = 0; i < GameManager::Get()->_towers.size(); i++)
             {
@@ -58,7 +59,7 @@ void Enemy::onCollisionEnter(GameObject* object) {
                     std::vector<Bullet*>* bulletList = GameManager::Get()->_towers[i]->_bulletList;
                     _currentHealth -= (*std::find(bulletList->begin(), bulletList->end(), object))->getDamage();
                     if (_currentHealth <= 0) {
-                        _currentHealth = 0;
+                        //_currentHealth = 0;
                         _isDestroyed = true;
                     }
                 }
@@ -66,7 +67,7 @@ void Enemy::onCollisionEnter(GameObject* object) {
                     std::vector<BlastBullet*>* blastList = GameManager::Get()->_towers[i]->_blastList;
                     _currentHealth -= (*std::find(blastList->begin(), blastList->end(), object))->getDamage();
                     if (_currentHealth <= 0) {
-                        _currentHealth = 0;
+                        //_currentHealth = 0; 
                         _isDestroyed = true;
                     }
                 }
@@ -74,4 +75,4 @@ void Enemy::onCollisionEnter(GameObject* object) {
         }
     }
     std::cout << _currentHealth << std::endl;
-}   
+}

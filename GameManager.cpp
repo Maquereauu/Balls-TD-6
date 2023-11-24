@@ -100,8 +100,6 @@ void GameManager::Initialize()
 	_o_tower = new Tower();*/
 	_waves = { { 0,0,0,0,0,1,1 } ,{ 0,0,0,0,1,1,1 } ,{ 0,0,0,0,1,1,2 } };
 	_o_tower.push_back(new Tower(100, 100, 1));
-	_o_enemy = new GameObject(50, 50, 300, 300, 10, GoLabel::Enemies);
-	_o_enemy->setVector(1.0, 0.f);
 	_o_door = new GameObject(150, 150, 1500, 300, 10, GoLabel::Door);
 
 	uhdSelectTowerDeux = new GameObject(100, 100, 140, 15, 0, GoLabel::Door);

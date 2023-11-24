@@ -25,7 +25,6 @@ private:
 	std::vector<int> secondWaveTypes;
 	std::vector<int> thirdWaveTypes;
 	std::vector<Tower*> _o_tower;
-	GameObject* _o_enemy;
 	GameManager() {};
 	sf::Clock o_timer;
 	float timer;
