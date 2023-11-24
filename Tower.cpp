@@ -116,3 +116,11 @@ void Tower::giveStats() {
 		}
 	}
 }
+void Tower::setIndexArea(int index) 
+{
+	IndexArea = index;
+};
+int Tower::getIndexArea()
+{
+	return IndexArea;
+};
