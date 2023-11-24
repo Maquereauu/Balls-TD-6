@@ -4,8 +4,7 @@
 #include "Window.h"
 #include "GameObjectEnum.h"
 #include "Tower.h"
-#include "BlastBullet.h"
-#include "Enemy.h"
+#include "Bullet.h"
 
 GameManager* GameManager::pInstance = nullptr;
 
@@ -98,7 +97,6 @@ void GameManager::Initialize()
 	o_top->getShape().setFillColor(sf::Color::Color(128, 128, 128, 255));
 	o_restart->getShape().setFillColor(sf::Color::Green);
 	_o_tower = new Tower();*/
-	_waves = { { 0,0,0,0,0,1,1 } ,{ 0,0,0,0,1,1,1 } ,{ 0,0,0,0,1,1,2 } };
 	_o_tower.push_back(new Tower(100, 100, 1));
 	_o_enemy = new GameObject(50, 50, 300, 300, 10, GoLabel::Enemies);
 	_o_enemy->setVector(1.0, 0.f);
@@ -135,7 +133,7 @@ void GameManager::Mretry()
 	// retire les bricks en vie
 	//std::vector<GameObject*>().swap(_entities[GoLabel::brick]);
 	//_entities[GoLabel::brick].clear();
-	// ajoute les nouvelles bricks pour ï¿½tre en vie
+	// ajoute les nouvelles bricks pour être en vie
 
 }
 
@@ -172,96 +170,17 @@ void GameManager::launchGame()
 	//_win = false;
 	sf::Clock o_clock;
 	float deltaTime = 0.f;
-	//timer = 0.f;
-	timerSpawn = 3.f;
-	int enemiesCounter = 0;
-	int wave = 0;
+	timer = 0.f;
+
 	while (_window && _window->isOpen())
 	{
 		EventManager::Get()->Update(_window);
-		if(wave< _waves.size())
-		{
-			if (enemiesCounter < _waves[wave].size())
-			{
-				if (timerSpawn > 2) {
-					new Enemy(150 - 50 * _waves[0][enemiesCounter], 300, _waves[wave][enemiesCounter]);
-					enemiesCounter++;
-					timerSpawn = o_timerSpawn.restart().asSeconds();;
-				}
-			}
-		}
-		else {
-			//print you win ;D
-		}
-		for (int i = 0; i < _entities[GoLabel::Blasts].size(); i++)
-		{
-			for (int j = 0; j < _entities[GoLabel::Enemies].size(); j++)
-			{
-				_entities[GoLabel::Blasts][i]->collide(_entities[GoLabel::Enemies][j]);
-			}
-		}
-		for (int i = 0; i < _entities[GoLabel::Manstre].size(); i++)
-		{
-			for (int j = 0; j < _entities[GoLabel::Enemies].size(); j++)
-			{
-				_entities[GoLabel::Manstre][i]->collide(_entities[GoLabel::Enemies][j]);
-			}
-		}
-		for (int i = 0; i < _towers.size(); i++)
-		{
-			for (int j = 0; j < _entities[GoLabel::Enemies].size(); j++)
-			{
-				if (_towers[i]->_area->isColliding(*_towers[i]->_firstEnemy))
-				{
-					if (_towers[i]->_firstEnemy->getPos().x < _entities[GoLabel::Enemies][j]->getPos().x && _entities[GoLabel::Enemies][j]->_isDestroyed == false)
-					{
-						_towers[i]->_firstEnemy = _entities[GoLabel::Enemies][j];
-					}
-				}
-				else if (_towers[i]->_firstEnemy != _entities[GoLabel::Enemies][j])
-				{
-					_towers[i]->_firstEnemy = _entities[GoLabel::Enemies][j];
-				}
-			}
-			_towers[i]->stateMachine();
-		}
 
-		for (int j = 0; j < _towers.size(); j++)
+		for (int i = 0; i < _entities[GoLabel::Bullets].size(); i++)
 		{
-			if (_towers[j]->_type != 2)
+			for (int j = 0; j < _entities[GoLabel::Enemies].size(); j++)
 			{
-				for (int i = 0; i < _entities[GoLabel::Bullets].size(); i++)
-				{
-					for (int k = 0; k < _towers[j]->_bulletList->size(); k++)
-					{
-						if (_towers[j]->_bulletList->at(k) == _entities[GoLabel::Bullets][i]) {
-							for (int l = 0; l < _entities[GoLabel::Enemies].size(); l++)
-							{
-								if (_towers[j]->_bulletList->at(k)->getTarget() == _entities[GoLabel::Enemies][l])
-								{
-									_towers[j]->_bulletList->at(k)->collide(_entities[GoLabel::Enemies][l]);
-								}
-							}
-						}
-					}
-				}
-			}
-			else {
-				for (int i = 0; i < _entities[GoLabel::Blasts].size(); i++)
-				{
-						for (int k = 0; k < _towers[j]->_blastList->size(); k++)
-						{
-							if (_towers[j]->_blastList->at(k) == _entities[GoLabel::Blasts][i]) {
-								for (int l = 0; l < _entities[GoLabel::Enemies].size(); l++)
-								{
-									if (_towers[j]->_blastList->at(k)->getTarget() == _entities[GoLabel::Enemies][l])
-									{
-										_towers[j]->_blastList->at(k)->collide(_entities[GoLabel::Enemies][l]);
-									}
-								}
-							}
-					}
-				}
+				_entities[GoLabel::Bullets][i]->collide(_entities[GoLabel::Enemies][j]);
 			}
 		}
 
@@ -272,35 +191,8 @@ void GameManager::launchGame()
 
 		for (int i = 0; i < _towers.size(); i++)
 		{
-			if(_towers[i]->_type != 2)
-			{
-				for (int j = 0; j < _towers[i]->_bulletList->size(); j++)
-				{
-					if (!(_towers[i]->_bulletList->at(j)->isColliding(*(_towers[i]->_area))))
-					{
-						_towers[i]->_bulletList->at(j)->_isDestroyed = true;
-					}
-					else
-					{
-						_towers[i]->_bulletList->at(j)->setVectorTowardsTarget();
-					}
-
-				}
-			}
-			else {
-				for (int j = 0; j < _towers[i]->_blastList->size(); j++)
-				{
-					if (!(_towers[i]->_blastList->at(j)->isColliding(*(_towers[i]->_area))))
-					{
-						_towers[i]->_blastList->at(j)->_isDestroyed = true;
-					}
-					else
-					{
-						_towers[i]->_blastList->at(j)->setVectorTowardsTarget();
-					}
-
-				}
-			}
+			for (int j = 0; j < _entities[GoLabel::Enemies].size(); j++)
+				_towers[i]->stateMachine(_entities[GoLabel::Enemies][j]);
 		}
 
 		for (int i = 0; i < _entities.size(); i++)
@@ -312,6 +204,23 @@ void GameManager::launchGame()
 				}
 			}
 		}
+
+		for (int i = 0; i < _towers.size(); i++)
+		{
+			for(int j = 0;j < _towers[i]->_bulletList->size();j++)
+			{
+				if (!(_towers[i]->_bulletList->at(j)->isColliding(*(_towers[i]->_area))))
+				{
+					_entities[GoLabel::Bullets].erase(std::remove(_entities[GoLabel::Bullets].begin(), _entities[GoLabel::Bullets].end(), _towers[i]->_bulletList->at(j)), _entities[GoLabel::Bullets].end());
+				}
+				else
+				{
+					_towers[i]->_bulletList->at(j)->setVectorTowardsTarget();
+				}
+
+			}
+		}
+
 		for (int i = 0; i < _entities.size(); i++)
 		{
 			for (int j = 0; j < _entities[i].size(); j++)
@@ -327,18 +236,11 @@ void GameManager::launchGame()
 		}
 		_window->draw(text);
 		_window->display();
-		if (_entities[GoLabel::Enemies].size() == 0 && enemiesCounter == _waves[wave].size() -1)
-		{
-			wave++;
-			enemiesCounter = 0;
-			timerSpawn = 3.f;
-		}
+
 		deltaTime = o_clock.restart().asSeconds();
-		//timer = o_timer.getElapsedTime().asSeconds();
-		timerSpawn = o_timerSpawn.getElapsedTime().asSeconds();
+		timer = o_timer.getElapsedTime().asSeconds();
 	}
 }
-
 //void GameManager::MmoveTower()
 //{
 //	Math::Vector2 mouseVector = Math::Vector2::createVector(_o_tower->getPos(), _mousePos->x, _mousePos->y).getNormalizeVector();
@@ -361,20 +263,6 @@ void GameManager::addToEntity(Tower* o_tower)
 	_towers.push_back(o_tower);
 }
 
-void GameManager::addToEntity(Enemy* o_enemy)
-{
-	_enemies.push_back(o_enemy);
-}
-
-void GameManager::addToEntity(BlastBullet* o_blastBullet)
-{
-	_blastBullets.push_back(o_blastBullet);
-}
-
-void GameManager::addToEntity(Bullet* o_bullet)
-{
-	_blastRadius.push_back(o_bullet);
-}
 void GameManager::MselectTowerUn()
 {
 	TowerCreated = 0;

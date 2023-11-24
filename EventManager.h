@@ -68,5 +68,6 @@ public:
 	void CheckEvent(GameManager::GameArea area, sf::Event::EventType eventName);
 
 	void Update(sf::RenderWindow* _window);
+	std::vector<Area> GetAreaVector();
 };
 

@@ -97,8 +97,8 @@
       <Filter>Fichiers sources\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="Tower.cpp">
-	  <Filter>Fichiers sources\Entities\GameObjects</Filter>
-	</ClCompile>
+      <Filter>Fichiers sources\Entities\GameObjects</Filter>
+    </ClCompile>
     <ClCompile Include="BlastBullet.cpp">
       <Filter>Fichiers sources\Entities\GameObjects</Filter>
     </ClCompile>
@@ -154,6 +154,9 @@
     </ClInclude>
     <ClInclude Include="BlastBullet.h">
       <Filter>Fichiers d%27en-tête\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="TowerStates.h">
+      <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
