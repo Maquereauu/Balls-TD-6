@@ -57,18 +57,24 @@ void Enemy::onCollisionEnter(GameObject* object) {
                 if (GameManager::Get()->_towers[i]->_type != 2)
                 {
                     std::vector<Bullet*>* bulletList = GameManager::Get()->_towers[i]->_bulletList;
-                    _currentHealth -= (*std::find(bulletList->begin(), bulletList->end(), object))->getDamage();
-                    if (_currentHealth <= 0) {
-                        //_currentHealth = 0;
-                        _isDestroyed = true;
+                    if (std::find(bulletList->begin(), bulletList->end(), object) != bulletList->end())
+                    {
+                        _currentHealth -= (*std::find(bulletList->begin(), bulletList->end(), object))->getDamage();
+                        if (_currentHealth <= 0) {
+                            //_currentHealth = 0;
+                            _isDestroyed = true;
+                        }
                     }
                 }
                 else {
                     std::vector<BlastBullet*>* blastList = GameManager::Get()->_towers[i]->_blastList;
-                    _currentHealth -= (*std::find(blastList->begin(), blastList->end(), object))->getDamage();
-                    if (_currentHealth <= 0) {
-                        //_currentHealth = 0; 
-                        _isDestroyed = true;
+                    if(std::find(blastList->begin(), blastList->end(), object) != blastList->end())
+                    {
+                        _currentHealth -= (*std::find(blastList->begin(), blastList->end(), object))->getDamage();
+                        if (_currentHealth <= 0) {
+                            //_currentHealth = 0; 
+                            _isDestroyed = true;
+                        }
                     }
                 }
             }

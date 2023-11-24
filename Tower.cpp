@@ -98,7 +98,7 @@ void Tower::giveStats() {
 	_buildingCost = GameManager::Get()->_modelStats[0][TowerLabel::buildingCost][_type][0];
 	_damage = GameManager::Get()->_modelStats[0][TowerLabel::damage][_type][_level];
 	_range = GameManager::Get()->_modelStats[0][TowerLabel::range][_type][_level];
-	_bulletSpeed = GameManager::Get()->_modelStats[0][TowerLabel::bulletSpeed][_type][_level];
+	_bulletSpeed = GameManager::Get()->_modelStats[0][TowerLabel::bulletSpeed][_type][0];
 	for(int i = 0;i<5;i++)
 	{
 		if (_type != 2)
