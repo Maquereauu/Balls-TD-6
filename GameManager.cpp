@@ -211,7 +211,7 @@ void GameManager::launchGame()
 			{
 				if (_towers[i]->_area->isColliding(*_towers[i]->_firstEnemy))
 				{
-					if (_towers[i]->_firstEnemy->getPos().x < _entities[GoLabel::Enemies][j]->getPos().x && _entities[GoLabel::Enemies][j]->_isDestroyed == false)
+					if (_towers[i]->_firstEnemy->getPos().x < _entities[GoLabel::Enemies][j]->getPos().x)
 					{
 						_towers[i]->_firstEnemy = _entities[GoLabel::Enemies][j];
 					}
@@ -268,6 +268,7 @@ void GameManager::launchGame()
 			_entities[GoLabel::Enemies][i]->collide(_o_door);
 		}
 
+
 		for (int i = 0; i < _towers.size(); i++)
 		{
 			if(_towers[i]->_type != 2)
@@ -281,6 +282,13 @@ void GameManager::launchGame()
 					else
 					{
 						_towers[i]->_bulletList->at(j)->setVectorTowardsTarget();
+					}
+					if(_towers[i]->_bulletList->at(j)->getTarget())
+					{
+						if (_towers[i]->_bulletList->at(j)->getTarget()->_isDestroyed)
+						{
+							_towers[i]->_bulletList->at(j)->_isDestroyed = true;
+						}
 					}
 
 				}
