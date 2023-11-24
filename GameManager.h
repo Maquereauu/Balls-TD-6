@@ -9,7 +9,8 @@ class Window;
 class GameManager
 {
 private:
-
+	sf::Font font;
+	sf::Text text;
 	static GameManager* pInstance;
 	void Initialize();
 	int money;
@@ -17,7 +18,7 @@ private:
 	int health;
 	std::vector<Bullet*>* _o_bullet;
 	Window* _o_window;
-	Tower* _o_tower;
+	std::vector<Tower*> _o_tower;
 	GameObject* _o_enemy;
 	GameManager() {};
 	sf::Clock o_timer;
@@ -28,7 +29,9 @@ private:
 	GameObject* uhdSelectTowerUn;
 	GameObject* uhdSelectTowerDeux;
 	GameObject* uhdSelectTowertroi;
+    int TowerCreated;
 public:
+
 	FileReader* o_model;
 	std::vector<std::vector<std::vector<std::vector<double>>>> _modelStats;
 	int* _width;
@@ -39,6 +42,8 @@ public:
 
 	typedef enum GameArea
 	{
+		Maps,
+		TowerArea,
 		SelectFirstTurret,
 		SelectSecondTurret,
 		SelectThirdTurret,
@@ -60,9 +65,15 @@ public:
 
 	//void MthrowBullet();
 	void Mretry();
+	void MselectTowerUn();
+	void MselectTowerDeux();
+	void MselectTowerTroi();
 	void Mquit();
+	void MPosetaTour();
+	void MUpgrade(Tower latour);
 	bool Mwin();
 	void MmoveTower();
+	std::vector<Tower*>& GetTowerList();
 
 	float _speed = 90.f; //
 	void launchGame();

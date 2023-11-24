@@ -7,5 +7,5 @@ BlastBullet::BlastBullet() : Bullet(getRadius(), getPos().x, getPos().y, getSpee
 
 void BlastBullet::onCollisionEnter(GameObject* object) 
 {
-	Bullet Blast(BlastZone, getPos().x, getPos().y, 0 ,6);
+	Bullet Blast(BlastZone, getPos().x +getRadius() / 2, getPos().y+getRadius()/2, 0 ,6);
 };
