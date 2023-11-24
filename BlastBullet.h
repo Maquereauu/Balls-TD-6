@@ -4,9 +4,9 @@ class BlastBullet : public Bullet
 {
 private:
 	float BlastZone;
-
+	Bullet* Blast;
 public:
-	BlastBullet();
+	BlastBullet(float radius, float x, float y, float speed, int damage);
 	void onCollisionEnter(GameObject* object) override;
 };
 

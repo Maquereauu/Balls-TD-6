@@ -6,7 +6,7 @@ Window::Window(int sizeX, int sizeY)
 {
 	_sizeX = sizeX;
 	_sizeY = sizeY;
-	_window = new sf::RenderWindow(sf::VideoMode(_sizeX, _sizeY), "Casse-briques");
+	_window = new sf::RenderWindow(sf::VideoMode(_sizeX, _sizeY), "Balls TD 6");
 
 }
 

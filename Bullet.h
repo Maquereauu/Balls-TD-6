@@ -6,6 +6,7 @@ private:
 	int _damage;
 	float _speed;
 	GameObject* _target;
+	int _type;
 public:
 	//std::string _side;
 
