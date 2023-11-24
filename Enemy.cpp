@@ -25,6 +25,7 @@ void Enemy::takeDamage(int damage) {
 
 void Enemy::dealDamage() {
     GameManager::Get()->health -= _currentHealth;
+    setPos(-1000, -1000);
     _currentHealth = 0;
     _isDestroyed = true;
 }

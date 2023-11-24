@@ -12,7 +12,11 @@ class GameManager
 {
 private:
 	sf::Font font;
+	sf::Texture _texture;
+	sf::Sprite* _background;
 	sf::Text text;
+	sf::Text winText;
+	sf::Text loseText;
 	static GameManager* pInstance;
 	void Initialize();
 	std::vector<Bullet*>* _o_bullet;

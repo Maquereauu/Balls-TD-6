@@ -85,8 +85,26 @@ void GameManager::Initialize()
 	text.setFillColor(sf::Color::Green);
 	text.setStyle(sf::Text::Bold | sf::Text::Underlined);
 	text.setPosition(200,15);
+
+	winText.setFont(font);
+	winText.setString("You won!");
+	winText.setCharacterSize(48);
+	winText.setFillColor(sf::Color::Yellow);
+	winText.setStyle(sf::Text::Bold | sf::Text::Underlined);
+	winText.setPosition(500, 200);
 	
 
+	loseText.setFont(font);
+	loseText.setString("You lost :(");
+	loseText.setCharacterSize(48);
+	loseText.setFillColor(sf::Color::Red);
+	loseText.setStyle(sf::Text::Bold | sf::Text::Underlined);
+	loseText.setPosition(500, 200);
+
+	if (!_texture.loadFromFile("image.png"));
+	_background = new sf::Sprite(_texture);
+	_background->setScale(*_width / _background->getLocalBounds().width,
+		*_height / _background->getLocalBounds().height);
 	//Game Area
 	/*_entities.resize(GoLabel::Total);
 	GameObject* o_leftSide = new GameObject(*_width / 4, *_height, 0.f, 0.f, 0.f, GoLabel::border);
@@ -99,7 +117,7 @@ void GameManager::Initialize()
 	o_restart->getShape().setFillColor(sf::Color::Green);
 	_o_tower = new Tower();*/
 	_waves = { { 0,0,0,0,0,1,1 } ,{ 0,0,0,0,1,1,1 } ,{ 0,0,0,0,1,1,2 } };
-	_o_tower.push_back(new Tower(100, 100, 1));
+	_o_tower.push_back(new Tower(920, 600, 1));
 	_o_door = new GameObject(150, 150, 1500, 300, 10, GoLabel::Door);
 
 	uhdSelectTowerDeux = new GameObject(100, 100, 140, 15, 0, GoLabel::Door);
@@ -177,6 +195,12 @@ void GameManager::launchGame()
 	while (_window && _window->isOpen())
 	{
 		EventManager::Get()->Update(_window);
+		if (health <= 0) {
+			_window->draw(loseText);
+			_window->display();
+
+			continue;
+		}
 		if(wave< _waves.size())
 		{
 			if (enemiesCounter < _waves[wave].size())
@@ -189,7 +213,8 @@ void GameManager::launchGame()
 			}
 		}
 		else {
-			//print you win ;D
+			_window->draw(winText);
+			_window->display();
 		}
 		for (int i = 0; i < _entities[GoLabel::Blasts].size(); i++)
 		{
@@ -327,13 +352,14 @@ void GameManager::launchGame()
 		}
 
 		_window->clear();
+		_window->draw(*_background);
 		for (int i = 0; i < GoLabel::Total; i++)
 		{
 			_o_window->winDraw(_entities[i]);
 		}
 		_window->draw(text);
 		_window->display();
-		if (_entities[GoLabel::Enemies].size() == 0 && enemiesCounter == _waves[wave].size() -1)
+		if (_entities[GoLabel::Enemies].size() == 0 && enemiesCounter == _waves[wave].size())
 		{
 			wave++;
 			enemiesCounter = 0;
