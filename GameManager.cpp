@@ -400,9 +400,11 @@ void GameManager::MPosetaTour()
 {
 	int impossible = 0;
 	std::cout << TowerCreated;
+	std::cout << "towercreated:" << TowerCreated;
 	if (TowerCreated != -1) {
 		for (int i = 0; i<_o_tower.size();i++) 
 		{
+			std::cout << "towercreated:" << TowerCreated;
 			if (metal < GameManager::Get()->_modelStats[0][TowerLabel::buildingCost][TowerCreated][0])
 			{
 				impossible = impossible + 1;
@@ -414,11 +416,11 @@ void GameManager::MPosetaTour()
 		}
 		if (impossible == 0)
 		{
+			std::cout << "towercreated:" << TowerCreated;
 			_o_tower.push_back(new Tower(_mousePos->x, _mousePos->y, TowerCreated));
 			metal = metal - GameManager::Get()->_modelStats[0][TowerLabel::buildingCost][TowerCreated][0];
-			
 			EventManager::Get()->AddArea(_mousePos->x, _mousePos->y, 100, 100, GameArea::TowerArea);
-			EventManager::Get()->AddEvent(GameArea::Maps, sf::Event::EventType::MouseButtonPressed, &Upgrade);
+			EventManager::Get()->AddEvent(GameArea::TowerArea, sf::Event::EventType::MouseButtonPressed, &Upgrade);
 			TowerCreated = -1;
 		}
 		
@@ -430,7 +432,7 @@ void GameManager::MUpgrade(Tower latour)
 	if(latour.canUpgrade() == false)
 		return;
 
-	if (money < GameManager::Get()->_modelStats[0][TowerLabel::cost][TowerCreated][0])
+	if (money < GameManager::Get()->_modelStats[0][TowerLabel::cost][latour._type][0])
 		return;
 
 	latour.upgrade();
