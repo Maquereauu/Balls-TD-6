@@ -7,6 +7,7 @@ EventManager::EventManager() {
 	//_dict[sf::Event::MouseButtonPressed] = &A;
 	//_dict[sf::Event::Closed] = &B;
 	//_dictmet[sf::Event::Closed] = &Cannon::cannonMove;
+	ActuelIndex = -1;
 }
 
 
@@ -37,6 +38,7 @@ void EventManager::Update(sf::RenderWindow* _window) {
 			if ((GameManager::Get()->_mousePos->x >= m_oAreas[i]._x && GameManager::Get()->_mousePos->x <= (m_oAreas[i]._width + m_oAreas[i]._x)) && (GameManager::Get()->_mousePos->y >= m_oAreas[i]._y && GameManager::Get()->_mousePos->y <= (m_oAreas[i]._height + m_oAreas[i]._y)))
 			{
 				CheckEvent(m_oAreas[i]._eGameArea, event.type);
+				ActuelIndex = i;
 			}
 			else {
 				CheckEvent(GameManager::GameArea::Quit, event.type);
@@ -47,4 +49,9 @@ void EventManager::Update(sf::RenderWindow* _window) {
 std::vector<Area> EventManager::GetAreaVector()
 {
 	return m_oAreas;
+};
+
+int EventManager::getActuelIndex()
+{
+	return ActuelIndex;
 };

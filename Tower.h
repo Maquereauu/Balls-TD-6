@@ -7,16 +7,18 @@ class Tower : public GameObject
 {
 private:
 	float _AS;
+	int IndexArea;
 	int _cost;
 	int _buildingCost;
 	int _damage;
-	int _level;
+
 	int _range;
 	int _bulletSpeed;
 	sf::Clock o_timer;
 	float timer;
 	int _state;
 public:
+	int _level;
 	int _type;
 	std::vector<Bullet*>* _bulletList;
 	std::vector<BlastBullet*>* _blastList;
@@ -29,5 +31,7 @@ public:
 	void upgrade();
 	bool canUpgrade();
 	void stateMachine();
+	void setIndexArea(int index);
+	int getIndexArea();
 };
 

@@ -24,7 +24,15 @@ void GameManager::Create()
 //}
 void Upgrade()
 {
-	GameManager::Get()->MUpgrade(*GameManager::Get()->GetTowerList()[GameManager::Get()->GetTowerList().size()-1]);
+	int result = 0;
+	for (int i = 0; i < GameManager::Get()->GetTowerList().size(); i++) 
+	{
+		if (EventManager::Get()->m_oAreas[EventManager::Get()->getActuelIndex()]._x == GameManager::Get()->GetTowerList()[i]->getPos().x && EventManager::Get()->m_oAreas[EventManager::Get()->getActuelIndex()]._y == GameManager::Get()->GetTowerList()[i]->getPos().y)
+		{
+			result = i;
+		}
+	}
+	GameManager::Get()->MUpgrade(*GameManager::Get()->GetTowerList()[result]);
 };
 
 void PosetaTour() {
@@ -446,6 +454,7 @@ void GameManager::MPosetaTour()
 			_o_tower.push_back(new Tower(_mousePos->x, _mousePos->y, TowerCreated));
 			metal = metal - GameManager::Get()->_modelStats[0][TowerLabel::buildingCost][TowerCreated][0];
 			EventManager::Get()->AddArea(_mousePos->x, _mousePos->y, 100, 100, GameArea::TowerArea);
+			_o_tower[_o_tower.size() - 1]->setIndexArea(_o_tower.size() - 1);
 			EventManager::Get()->AddEvent(GameArea::TowerArea, sf::Event::EventType::KeyPressed, &Upgrade);
 			TowerCreated = -1;
 		}
@@ -459,15 +468,14 @@ void GameManager::MUpgrade(Tower latour)
 		return;
 	}
 		
-
-	if (money < GameManager::Get()->_modelStats[0][TowerLabel::cost][latour._type][0])
+	if (money < GameManager::Get()->_modelStats[0][TowerLabel::cost][latour._type][latour._level])
 		return;
 
 	if ((_mousePos->x < latour.getPos().x - 100 && _mousePos->x >(100 + latour.getPos().x)) && (_mousePos->y < latour.getPos().y - 100 && _mousePos->y >(100 + latour.getPos().y)))
 		return;
 
 	latour.upgrade();
-	money = money - GameManager::Get()->_modelStats[0][TowerLabel::cost][latour._type][0];
+	money = money - GameManager::Get()->_modelStats[0][TowerLabel::cost][latour._type][latour._level];
 };
 
 std::vector<Tower*>& GameManager::GetTowerList()
