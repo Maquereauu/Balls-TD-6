@@ -46,6 +46,7 @@ float Bullet::getDamage()
 void Bullet::onCollisionEnter(GameObject* object)
 {
     _isDestroyed = true;
+    setPos(-1000, -1000);
 }
 
 void Bullet::setVectorTowardsTarget() {

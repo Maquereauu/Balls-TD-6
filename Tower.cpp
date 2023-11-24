@@ -86,6 +86,9 @@ void Tower::stateMachine() {
 void Tower::upgrade() {
 	_level += 1;
 	giveStats();
+	_area->_sizeX = _range;
+	_area->_sizeY = _range;
+	_area->setPos(_posX + _sizeX / 2 - _range, _posY + _sizeY / 2 - _range);
 }
 
 bool Tower::canUpgrade() {

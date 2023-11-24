@@ -45,7 +45,8 @@ void Enemy::onCollisionEnter(GameObject* object) {
                 std::vector<Bullet*> _blastRadius = GameManager::Get()->_blastRadius;
                 _currentHealth -= (*std::find(_blastRadius.begin(), _blastRadius.end(), object))->getDamage();
                 if (_currentHealth <= 0) {
-                    //_currentHealth = 0;
+                    _currentHealth = 0;
+                    setPos(-1000, -1000);
                     _isDestroyed = true;
                 }
             }
@@ -61,7 +62,8 @@ void Enemy::onCollisionEnter(GameObject* object) {
                     {
                         _currentHealth -= (*std::find(bulletList->begin(), bulletList->end(), object))->getDamage();
                         if (_currentHealth <= 0) {
-                            //_currentHealth = 0;
+                            _currentHealth = 0;
+                            setPos(-1000, -1000);
                             _isDestroyed = true;
                         }
                     }
@@ -72,7 +74,8 @@ void Enemy::onCollisionEnter(GameObject* object) {
                     {
                         _currentHealth -= (*std::find(blastList->begin(), blastList->end(), object))->getDamage();
                         if (_currentHealth <= 0) {
-                            //_currentHealth = 0; 
+                            _currentHealth = 0; 
+                            setPos(-1000, -1000);
                             _isDestroyed = true;
                         }
                     }
