@@ -11,6 +11,7 @@ typedef enum TowerLabel {
 };
 
 typedef enum EnemyLabel {
+	allStatsEnemy,
 	maxHp,
 	speed,
 	enemytotal

@@ -1,23 +1,77 @@
 #include "Enemy.h"
-
-Enemy::Enemy(float radius, float x, float y, float speed, int maxHealth)
-    : GameObject(radius, x, y, speed, -1), maxHealth(maxHealth), currentHealth(maxHealth) {
-    setVector(0.f, 0.f);
+#include "Tower.h"
+#include "BlastBullet.h"
+Enemy::Enemy(float posx, float posy,int type) : GameObject(50 + 100*type,50 + 100*type, posx, posy, 0, GoLabel::Enemies){
+    _type = type;
+    _maxHealth = GameManager::Get()->_modelStats[1][EnemyLabel::maxHp][_type][0];
+    _currentHealth = _maxHealth;
+    _speedEnemy = GameManager::Get()->_modelStats[1][EnemyLabel::speed][_type][0];
+    _speed = _speedEnemy;
+    setVector(1.0, 0.f);
 }
 
-Enemy::Enemy() : Enemy(15.f, 700.f, 500.f, 180.f, 100) {}; // Exemple avec 100 comme santé maximale
 
 float Enemy::getRadius() {
     return _sizeX / 2;
 }
 
 void Enemy::takeDamage(int damage) {
-    currentHealth -= damage;
-    if (currentHealth < 0) {
-        currentHealth = 0;
+    _currentHealth -= damage;
+    if (_currentHealth < 0) {
+        _currentHealth = 0;
+        _isDestroyed = true;
     }
 }
 
-bool Enemy::isAlive() const {
-    return currentHealth > 0;
+void Enemy::dealDamage() {
+    GameManager::Get()->health -= _currentHealth;
+    _currentHealth = 0;
+    _isDestroyed = true;
 }
+
+bool Enemy::isAlive() const {
+    return _currentHealth > 0;
+}
+
+void Enemy::onCollisionEnter(GameObject* object) {
+    if (object == GameManager::Get()->_o_door)
+    {
+        dealDamage();
+    }
+    else {
+        if (std::find(GameManager::Get()->_blastRadius.begin(), GameManager::Get()->_blastRadius.end(), object) != GameManager::Get()->_blastRadius.end()) {
+            for (int i = 0; i < GameManager::Get()->_blastRadius.size(); i++)
+            {
+                std::vector<Bullet*> _blastRadius = GameManager::Get()->_blastRadius;
+                _currentHealth -= (*std::find(_blastRadius.begin(), _blastRadius.end(), object))->getDamage();
+                if (_currentHealth <= 0) {
+                    _currentHealth = 0;
+                    _isDestroyed = true;
+                }
+            }
+        }else
+        {
+            for (int i = 0; i < GameManager::Get()->_towers.size(); i++)
+            {
+                if (GameManager::Get()->_towers[i]->_type != 2)
+                {
+                    std::vector<Bullet*>* bulletList = GameManager::Get()->_towers[i]->_bulletList;
+                    _currentHealth -= (*std::find(bulletList->begin(), bulletList->end(), object))->getDamage();
+                    if (_currentHealth <= 0) {
+                        _currentHealth = 0;
+                        _isDestroyed = true;
+                    }
+                }
+                else {
+                    std::vector<BlastBullet*>* blastList = GameManager::Get()->_towers[i]->_blastList;
+                    _currentHealth -= (*std::find(blastList->begin(), blastList->end(), object))->getDamage();
+                    if (_currentHealth <= 0) {
+                        _currentHealth = 0;
+                        _isDestroyed = true;
+                    }
+                }
+            }
+        }
+    }
+    std::cout << _currentHealth << std::endl;
+}   

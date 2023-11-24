@@ -1,10 +1,11 @@
 #pragma once
 typedef enum GoLabel {
 	Areas,
+	Enemies,
 	Bullets,
 	Towers,
-	Enemies,
 	Blasts,
+	Manstre,
 	Door,
 	Total
 };
